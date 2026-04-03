@@ -1,0 +1,165 @@
+---
+ 
+title: READ | Losers of Near-Kyiv
+---
+<h1 class='p-2'>Read Losers of Near-Kyiv 
+</h1>
+
+
+<div class='bg-light w-full flex flex-col md:grid grid-cols-[70%_30%]'>
+<div class='flex flex-col-reverse md:flex-col bg-dark-force text-white p-2'>
+<h2 class='p-2'>THE CHAPTERS:</h2>
+<ul class='*:odd:bg-black/20 *:py-1 *:hover:bg-highlight/50'>
+<li onclick='mouseOver("comics_0")' onmouseover='mouseOver("comics_0")' id='comics_0'><a href='./comics/comics_0/1' class='font-bold lonkin'>Issue #0</a> | 11 october, 2025 </li>
+<li onclick='mouseOver("comics_1")' onmouseover='mouseOver("comics_1")' id='comics_1'><a href='./comics/comics_1/1' class='font-bold lonkin'>Issue #1 | LoNK: The Introduction Comic</a> | 18 october, 2025 <br>(PUBLIC: 20 december, 2025) </li>
+<li onclick='mouseOver()' onmouseover='mouseOver()' id=''><b class='lonk'>ISSUE #2:</b> | ?? ??????, 2026 </li>
+<li onclick='mouseOver()' onmouseover='mouseOver()' id=''><b class='lonk'>???:</b> ??? | ??? </li>
+</ul>
+
+<div class='bg-black -skew-x-4 text-white flex-grow w-full p-4 justify-center gap-2 items-center flex'>
+<span class='text-red-400 font-bold font-block text-[1.2em]'>LoNK:</span> 
+
+<span id='random_tip'><!--tip here--></span>
+
+</div>
+
+</div>
+<div id='preview' class='bg-cover bg-dark-force h-70 md:h-full relative'>
+<div class='absolute top-0 right-0 h-full w-full bg-highlight/20'></div>
+
+<div id='pagePage' class='absolute hidden top-0 left-0 p-2 bg-black text-light-force'></div> <!-- page #3 -->
+
+<a id='read' class='button absolute hidden bottom-0 right-0 md:w-auto w-full'>read ?</a>
+</div>
+
+</div>
+
+<script>
+
+
+function mouseOver(x) {
+  if (x){ // IF THERE IS A VALID COMIC CHOSEN
+  var x_page;
+  
+  let currentcomicPage = x+'_page';  
+  if (localStorage.getItem(currentcomicPage)){
+  x_page=localStorage.getItem(currentcomicPage);
+  console.log(x_page);
+  }else{
+  x_page=1;
+    console.log(x_page);
+  }
+  
+  
+  let preview_img = x_page;
+  
+  if ((x=='comics_1') && ((x_page==1) || (x_page==83))){
+  preview_img = '2';
+  }
+  
+  
+  document.getElementById("read").classList.remove('hidden');
+  document.getElementById("read").classList.add('block');
+  document.getElementById("read").innerHTML = 'read?';
+  
+  if (x_page!==1){
+  document.getElementById("pagePage").innerHTML='currently on <b>page #'+x_page+'</b>';
+  document.getElementById("pagePage").classList.remove('hidden');  
+  document.getElementById("pagePage").classList.add('block'); 
+  
+  document.getElementById("read").innerHTML = 'continue?';
+  
+  }else{
+  document.getElementById("pagePage").classList.add('hidden'); 
+  document.getElementById("pagePage").classList.remove('block'); 
+  }
+  
+  document.getElementById("read").href='./comics/' + x +'/'+ x_page +'.html';    
+  document.getElementById("preview").style.backgroundImage = "url('../imgs/"+x+"/"+preview_img+".png')"; 
+
+  let currentcomicRead = x+'_read';
+  
+  if (localStorage.getItem(currentcomicRead)=='true'){
+  document.getElementById("pagePage").classList.add('block');  
+  document.getElementById("pagePage").classList.remove('hidden'); 
+  document.getElementById("pagePage").innerHTML='✔️ finished';
+  document.getElementById("preview").style.backgroundImage = "url('../imgs/"+x+"/"+preview_img+".png')"; 
+  document.getElementById("read").innerHTML = 'reread?';
+  }
+  
+  
+  
+  }else{
+  document.getElementById("read").classList.remove('block');
+  document.getElementById("read").classList.add('hidden');
+  document.getElementById("pagePage").classList.remove('block');  
+  document.getElementById("pagePage").classList.add('hidden'); 
+  
+  
+  document.getElementById("preview").style.backgroundImage = "url('../imgs/other_404.png')"; 
+  
+  }
+
+}
+
+
+window.onload = function() {
+
+let y=localStorage.getItem('comics_0_read'); 
+let xy=localStorage.getItem('comics_1_read'); //checks if its read
+
+if(y=='true'){
+document.getElementById("comics_0").innerHTML = '🗹 READ | ' + document.getElementById("comics_0").innerHTML;
+}
+
+if(xy=='true'){
+document.getElementById("comics_1").innerHTML = '🗹 READ | ' + document.getElementById("comics_1").innerHTML;
+}
+
+
+
+
+
+//random tip script, move it to document on load rather than window
+const tip= document.getElementById('random_tip');
+
+
+const s_state=localStorage.getItem('spoiler_state');
+
+
+const tips = ["know better than to make assumptions", "this story is NOT about student life", "BREAKING NEWS!!! some guy can’t stop having a shitty day!!!", "gay people are real!", "україна понад усе!", "Losers of Near-Kyiv", "<a href='./contact'>put your own tagline here!</a>", "trans rights are human rights!", "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>click here for a silly little thing!</a>", "best webcomic on the internet since 2025! <sup>unverified source</sup>",
+
+`<button class='underline decoration-2 button-none' onclick='showNewAchievement("ach_luckyread");
+'>🍀 i see you like reading these. want an ⭐ achievement?</button>`
+
+];
+
+
+if (s_state==='false'){
+let random_tip = Math.floor(Math.random() * tips.length);
+tip.innerHTML=tips[random_tip];
+}else{
+tip.innerHTML="A FUN TAGLINE CAN APPEAR HERE AFTER READING THE INTRODUCTION :D";
+}
+
+
+
+
+
+}
+
+/*
+window.onload = function() {
+
+
+
+let xyz=localStorage.getItem('introduction'); // checks if theres a saved page for introduction comic
+if(xyz){
+document.getElementById("issue_1").innerHTML += '<br> currently on page #' + localStorage.getItem('introduction');
+document.getElementById("read").innerHTML = 'continue?';
+}
+
+
+};*/
+
+</script>

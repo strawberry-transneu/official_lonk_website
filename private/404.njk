@@ -1,0 +1,31 @@
+---
+layout: none.njk
+title: ???
+---
+<div class='bg-light min-h-50 w-11/12 flex-center flex-col justify-center items-center'>
+<h1 class='font-block' id='E_Error'>ERROR <b class='text-cyan-400'>404</b>: PAGE NOT FOUND | ПОМИЛКА <b class='text-cyan-400'>404</b>: СТОРІНКА НЕ ЗНАЙДЕНА </h1>
+<img src='{{"/"|url}}imgs/other_404.png' class='w-[50%]'>
+<div id='E_text'>consider returning back!... | можливо, треба повернутися!... <br>  <button onclick="history.back()">go back | назад</button> </div>
+
+<!-- ['Getting lost all by yourself, beautiful?', "This isn't your room, so I gently ask you to consider gettin' the fuck outta here.", "...is 404 the right room? Maybe it's the wrong one? Aaah, screw weird room numbers! ", '404, huh...' "Were you looking for me?"]-->
+</div>
+
+<script>
+let lang=localStorage.getItem('lang');
+const er=document.getElementById('E_Error');
+const et=document.getElementById('E_text');
+
+if (lang){
+
+if (lang=='uk-UA'){
+  er.innerHTML=`ПОМИЛКА <b class='text-cyan-400'>404</b>: СТОРІНКА НЕ ЗНАЙДЕНА `;
+  et.innerHTML=`можливо, треба повернутися!... <br>  <button onclick="history.back()">назад</button> `;
+}else{
+  er.innerHTML=`ERROR <b class='text-cyan-400'>404</b>: PAGE NOT FOUND`;
+  et.innerHTML=`consider returning back!...  <br>  <button onclick="history.back()">go back </button>`;
+}
+
+}
+
+
+</script>

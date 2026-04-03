@@ -1,0 +1,43 @@
+
+
+
+<div class='flex flex-wrap flex-row p-2 gap-2 w-full *:w-[30%] md:*:w-1/6'>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/pfp.jpg">
+<button onclick='pfpPick("pfp.jpg");'>PICK?</button>
+</div>
+
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/acryl_1.png">
+<button onclick='pfpPick("acryl_1.png");'>PICK?</button>
+</div>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/dima_1.png">
+<button onclick='pfpPick("dima_1.png");'>PICK?</button>
+</div>
+
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/zaria_1.png">
+<button onclick='pfpPick("zaria_1.png");'>PICK?</button>
+</div>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/misha_1.png">
+<button onclick='pfpPick("misha_1.png");'>PICK?</button>
+</div>
+
+
+</div>
+
+<script>
+function pfpPick(x){
+const y = "{{ '/' | url }}imgs/pfps/"+x;
+console.log(y);
+localStorage.setItem("pfp", y);
+alert('new image picked! please reload the page!');
+}
+</script>

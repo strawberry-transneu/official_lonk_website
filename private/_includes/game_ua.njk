@@ -1,0 +1,738 @@
+<div class='flex flex-col flex-center w-full md:w-5/6 '>
+
+
+
+<!-- MUSIC PLAYER -->
+<div class='text-black w-full'>
+<audio id='music' loop></audio>
+<!--
+<button onclick='pauseAudio();'>pause music (PLACEHOLDER)</button>
+-->
+</div>
+
+<!-- THE BOX WITH THE GAME -->
+<div id='gamebox_LOAD' class='bg-white w-full h-[50vh] text-black font-bold'>БУДЬ ЛАСКА, ПОЧЕКАЙТЕ. СТОРІНКА ЗАВАНТАЖУЄТЬСЯ. </div>
+<div class='bg-black text-light-force border-t-2 border-dashed w-full py-1 px-2 text-center'>  <small> [ КЛАЦНІТЬ НА ГРУ АБО НАТИСНІТЬ "Z" ЩО Б ПРОЧИТАТИ НАСТУПНИЙ ДІАЛОГ. ЯК ЗАВЕРШИТЕ СВОЇ СПРАВИ, НАЖМІТЬ НА ОПЦІЮ З ➡️ ]</small></div>
+
+<section  id='gamebox' style='background-image: url("{{'/'}}imgs/comics_1_game/_.png");' class='bg-contain relative flex flex-col w-full h-full bg-white aspect-3/2 text-dark-force '>
+
+<!-- NEXT BUTTON. ONCLICK OF THE GAME BASICALLY -->
+
+<button class='z-15 button-none absolute h-full w-full' onclick='next_dialogue();' id='nextAction'></button>
+
+<!-- DIMA BUBBLES -->
+
+<div id='d_thought' style='' class='z-9 md:bg-transparent bg-white/70 bg-size-[70%] absolute  md:bottom-[auto] bottom-[0%] left-[0%] md:left-[2%]  w-full md:top-[2%] md:w-[38%] p-2 text-[0.8em] md:text-[0.94em] font-bold md:text-[1.45vw] text-black'>
+DIMA THOUGHT</div>
+
+
+<div id='d_text' class='z-9 dima-border inline-block skew-x-2 skew-y-1 bg-paper-force bg-size-[70%] bg-white absolute left-[3%] top-[55%] w-[35%] p-4  md:text-[1.45vw] font-bold text-black'>
+DIMA TEXT</div>
+
+<!-- ACRYL BUBBLES -->
+
+<div id='a_text' class='z-9 acryl-border bg-paper-force bg-size-[70%] bg-white absolute right-[2%] top-[7%] w-[45%] p-4 -skew-y-3 skew-x-2 *:-skew-x-2 *:skew-y-3 md:text-[1.45vw] font-bold text-black'>
+ACRYL TEXT
+</div>
+
+
+<!-- SPRITE BOXES -->
+
+<div style='background-image: url("{{'/'}}imgs/comics_1_game/d_neu.png")' id='d_exp' class='z-2 absolute w-full h-full bg-size-[100%_100%] top-0 left-0'>
+
+<div id='d_exp_new' class='z-3 absolute top-0 left-0 w-full h-full bg-size-[100%_100%]'>
+</div>
+
+</div>
+
+<div style='background-image: url("{{'/'}}imgs/comics_1_game/a_l_neu.png")' id='a_exp' class='z-4 absolute w-full h-full bg-size-[100%_100%] top-0 left-0'>
+
+<div id='a_exp_new' class='z-5 absolute top-0 left-0 w-full h-full bg-size-[100%_100%]'>
+</div>
+
+</div>
+
+
+<!-- CHOICES LIST -->
+
+<div id='choices_list' class='z-50 flex flex-col *:w-full border-black-600 bg-white border-4 absolute right-[8%] bottom-[5%] w-[60%] p-2 text-[0.95em] *:!bg-none rainbow-order-hover text-dark'>
+
+</div>
+
+</section>
+
+<!-- DOWN NOTE -->
+
+<div id='d_text_mobile' class='z-9 text-black dima-border text-[0.9em] inline-block skew-x-1 skew-y-1 bg-paper-force bg-size-[70%] bg-white w-full p-4  font-bold '>
+DIMA TEXT</div>
+
+<div id='a_text_mobile' class='z-9 text-black acryl-border text-[0.9em] inline-block bg-paper-force bg-size-[70%] bg-white w-full p-4 -skew-y-1 skew-x-1  font-bold'>
+ACRYL TEXT
+</div>
+
+
+<div id='choices_list_mobile' class='z-50 flex flex-col *:w-full gap-1 border-4 w-full p-2 text-[0.95em] *:!bg-none rainbow-order-hover text-dark'>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+function isMobile() {
+  const minWidth = 768; // Minimum width for desktop devices
+  return window.innerWidth < minWidth || screen.width < minWidth;
+}
+
+if (isMobile()) {
+  document.getElementById('choices_list').remove();
+   document.getElementById('d_text').remove();
+  document.getElementById('a_text').remove();
+    document.getElementById('d_text_mobile').id='d_text';
+  document.getElementById('a_text_mobile').id='a_text';
+
+  document.getElementById('choices_list_mobile').id='choices_list';
+} else {
+  document.getElementById('choices_list_mobile').remove();
+   document.getElementById('d_text_mobile').remove();
+  document.getElementById('a_text_mobile').remove();
+
+}
+
+// MUSIC SECTION
+var musicc = document.getElementById("music"); 
+
+function playAudio(iddd) {
+  // "mondayhopes_oj_on_the_table.mp3"
+  musicc.src="{{'/'|url}}sounds/" + iddd;  
+  musicc.volume=0;
+  musicc.play(); 
+  $('#music').animate({volume: 0.065}, 1000);
+} 
+
+function pauseAudio() { 
+ $('#music').animate({volume: 0}, 1000);
+					setTimeout(
+					function() 
+					{
+   musicc.pause(); 
+
+					}, 1010);
+
+} 
+
+// PRESET VARIABLES
+
+
+let start_choices=[
+{title: "що з правилами?", act:"rules_dialogue"},
+{title: `ім'я "Акрил"`, act:"name_dialogue"},
+{title: "мистецтво", act:"art_dialogue"},
+{title: "інтереси", act:"hobbies_dialogue"},
+{unlockable: true, title: "твоя нога", act:"leg_dialogue"},
+{unlockable: true, title: "кого ти чекав при вході? ➡️", act:"door_dialogue"},
+];
+
+let theatre_choices=[
+{title: "ТЕАТР", act:"theatre_dialogue"}, //this is so fucking funny
+];
+
+let gf_choices=[
+{title: "збрехати про свою подругу чиїм хлопцем ти прикидався один день в дитинстві <br>(100% то була моя справжня дівчина)", act:"lie_dialogue"}, 
+{title: "сказати правду про свою подругу чиїм хлопцем ти прикидався один день в дитинстві <br>(в мене ніколи не було справжньої дівчини)", act:"truth_dialogue"}, 
+];
+
+let start_dialogue=[
+{ per:'dt', text:"я не знаю як балакати з людьми. <small>рятуйте...</small>", d_exp:'neu' }, //dt = dima thought ; d = dima ; a = acryl 
+{ per:'a', text:"на мене дивишся?", d_exp:'worry_a_talk', a_exp:'l_tease_talk', musicPlay:"mondayhopes_oj_on_the_table.mp3"},
+{ per:'d', text:"я...", d_exp:'worry_talk', a_exp:'l_neu'},
+{ per:'dt', text:"як мені на щось таке навіть відповісти?", hide:['#d_text'],  d_exp:'worry_blush'},
+{ per:'a', text:"слухай, як хочеш поговорити, давай поговоримо! це просто.", a_exp:'l_close_talk', hide:["#d_thought"], d_exp:'worry_a_blush'},
+{ per:'dt', text:"...", d_exp:'worry_blush', a_exp:'l_neu'},
+{ per:'dt', text:"певно, я <i>міг би</i> познайомитися з ним трохи ближче.", d_exp:'worry_blush'},
+{ per:'dt', text:"певно, я <i>міг би</i> познайомитися з ним трохи ближче. <br> але що спитати?"},
+{ choices: start_choices }
+];
+
+let rules_dialogue=[
+{ per:'d', text:"що з правилами?", d_exp:'neu_talk', a_exp:'l_neu'},
+{ per:'a', text:"вау, а тобі не все одно? гм... ну...", d_exp:'neu', a_exp:'r_surprised'},
+{ per:'a', text:"це був папірець з усілякими вказівками, написаний <u class='decoration-misha'>мішою</u>.", a_exp:'r_neu_talk'},
+{ per:'d', text:"я знаю це, але... ", d_exp:'neu_talk', a_exp:'r_neu'},
+{ per:'d', text:"я знаю це, але... <br>нащо поверх малювати?", hide:['#a_text'], d_exp:'worry_a_talk'},
+{ per:'a', text:"хотілося виплескнути почуття. ", d_exp:'worry_a', a_exp:'r_neu_talk'},
+{ per:'a', text:"хотілося виплескнути почуття. <br> чи є щось символічніше за сторінку з правилами для такого малюнка?", d_exp:'neu'},
+{ per:'d', text:"ось як.", d_exp:'neu_talk', a_exp:'r_neu'},
+{ per:'a', text:"і, якщо без базару, ", d_exp:'neu', hide:['#d_text'], a_exp:'l_annoyed'},
+{ per:'a', text:"і, якщо без базару, <br> їх там так багато, чел, я не впевнений будь-хто справді їх читає."},
+{ per:'dt', text:"хочу заперечити і сказати що <b>я<b> б прочитав їх, втім...", a_exp:'l_bored'},
+{ per:'dt', text:"хочу заперечити і сказати що <b>я<b> б прочитав їх, втім...<br> я дислексик...", d_exp:'worry_blush'},
+{ per:'d', text:"що з ними станеться тепер?", d_exp:'neu_talk', hide:['#d_thought']},
+{ per:'a', text:"хз. я ставлю на те що міша їх з нуля знову напише.", a_exp:'l_close_talk', d_exp:'neu'},
+{ per:'dt', text:"<b>З НУЛЯ??</b>", d_exp:'amused', a_exp:'l_close', hide:['#d_text']},
+{ choices: start_choices, unlock:"door_dialogue"},
+
+]
+
+
+let name_dialogue=[
+{ per:'d', text:"тож... акрил.", d_exp:'neu_talk', a_exp:'l_neu'},
+{ per:'a', text:"так?", d_exp:'neu', a_exp:'l_neu_talk'},
+{ per:'d', text:"<u class='decoration-acryl'>акрил</u> це...", d_exp:'neu_talk', a_exp:'l_neu'},
+{ per:'d', text:"<u class='decoration-acryl'>акрил</u> це... твоє прізвисько."},
+{ per:'d', text:"<u class='decoration-acryl'>акрил</u> це... твоє прізвисько.<br> митець, малюнки, фарба. розумію.", d_exp:'neu_talk'},
+{ per:'d', text:"але як тебе, е..."},
+{ per:'d', text:"але як тебе, е... <b><i>НАСПРАВДІ</i></b> звуть?", d_exp:'worry_a_gasp'},
+{ per:'a', text:"акрил.", d_exp:'worry_a', a_exp:'l_neu_talk' },
+{ per:'d', text:"...не може бути.", d_exp:'worry_a_talk', a_exp:'l_bored'},
+{ per:'a', text:"слухай, мене <b>всі</b> звуть акрил. <br> навіть міша.", d_exp:'worry_a', a_exp:'l_annoyed' },
+{ per:'a', text:"слухай, мене <b>всі</b> звуть акрил. <br> навіть міша. <br> тоооож, ось тобі моє ім'я!"},
+{ per:'dt', text:"так сильно не хоче говорити...?", hide:['#d_text'], a_exp:'l_bored' },
+{ per:'dt', text:`може його справжнє ім'я занадто іноземне для інших людей, тож він більше любить своє прізвисько...`, d_exp:'worry'},
+{ per:'dt', text:"якщо так, я розумію."},
+
+{ choices: start_choices, unlock:"door_dialogue" },
+
+]
+
+let art_dialogue=[
+{ per:'d', text:"ти... графічним дизайном займаєшся? ", d_exp:'neu_talk', a_exp:'l_okay'},
+{ per:'d', text:"це... е... насправді, я думаю це достатньо круто...", d_exp:'worry_talk'},
+{ per:'a', text:"аааа, та, ні, таке собі.", a_exp:'r_annoyed'},
+{ per:'a', text:"звісно дякую, але мені не дуже це подобається.", hide:['#d_text']},
+{ per:'d', text:"що?", d_exp:'amused', a_exp:'l_bored'},
+{ per:'a', text:"графічний дизайн це &quot; достатньо круто &quot; , але... це не моя улюблена річ.", a_exp:'l_annoyed', d_exp:'worry_a'},
+{ per:'d', text:"тоді що є...?", d_exp:'worry_a_talk'},
+{ per:'a', text:"<b>ТЕАТР</b>, бро.", a_exp:'l_excited_talk', d_exp:'worry_a'},
+
+{ choices: theatre_choices, a_exp:'l_excited',},
+
+]
+
+
+let theatre_dialogue=[
+{ per:'a', text:"актори. ", a_exp:'l_excited_talk'},
+{ per:'a', text:"актори. фільми."},
+{ per:'a', text:"актори. фільми. вистави. "},
+{ per:'a', text:"актори. фільми. вистави. мюзикли."},
+{ per:'a', text:"актори. фільми. вистави. мюзикли. <br> о господи <b>ОБОЖНЮЮ</b> мюзикли."},
+{ per:'a', text:"ти якісь знаєш?", a_exp:'l_close_talk',},
+{ per:'dt', text:"ні. жодного. нуль. ніколи.", d_exp:'worry', a_exp:'l_close',},
+{ per:'dt', text:"хоча, взагалі, може...", d_exp:'worry_a', a_exp:'l_neu'},
+{ per:'d', text:"дізней ж враховується? ", d_exp:'worry_a_talk'},
+{ per:'a', text:"не може бути що б дізней НЕ враховувався.", d_exp:'worry_a', a_exp:'l_tease_talk', hide:['#d_thought']},
+{ per:'a', text:"не знаю однієї людини якій б не сподобалася гарна дізнеєвська пісня."},
+{ per:'d', text:"...", hide:["#a_text"], a_exp:'l_tease'},
+{ per:'d', text:"...якщо ти так сильно любиш театр, чому б просто...", d_exp:'worry_talk'},
+{ per:'d', text:"...якщо ти так сильно любиш театр, чому б просто...<br>не займатися цим?", a_exp:'l_bored', d_exp:'worry_a_talk'},
+{ per:'a', text:"а. ахах. весела річ,", a_exp:'l_annoyed', d_exp:'worry_a'},
+{ per:'a', text:"нога.", a_exp:'r_annoyed', hide:["#d_text"], d_exp:'worry_a_talk'},
+{ per:'dt', text:"<b>блять.</b> я міг би й здогадатися...", d_exp:'worry_talk'},
+{ choices: start_choices, unlock:"leg_dialogue", a_exp:'l_bored'},
+
+]
+
+let hobbies_dialogue=[
+
+{ per:'d', text:"чим... інтересуєшся?", d_exp:'neu_talk'},
+{ per:'a', text:"ой, та всім.", a_exp:'l_okay_talk', d_exp:'neu'},
+{ per:'a', text:"тобто, не всім-всім?", a_exp:'r_neu_talk',},
+{ per:'a', text:"багатьма речами.", a_exp:'l_neu_talk'},
+{ per:'a', text:"мода."},
+{ per:'a', text:"мода. мистецтво.  "},
+{ per:'a', text:"мода. мистецтво. театр. "},
+{ per:'a', text:"мода. мистецтво. театр. астрономія."},
+{ per:'a', text:"астрологія теж-"},
+{ per:'a', text:"астрологія теж- лиш як хобі.", a_exp:'r_neu_talk',},
+{ per:'a', text:"аніме дивлюся.", a_exp:'l_neu_talk',},
+{ per:'a', text:"аніме дивлюся. фільми."},
+{ per:'a', text:"аніме дивлюся. фільми. в ігри граю."},
+{ per:'a', text:"знаєш, то таке."},
+
+{ per:'a', text:"але ось ти ...", a_exp:'l_tease_talk'},
+
+{ per:'a', text:"але ось ти ... певно, маєш якийсь неймовірний, унікальний інтерес про який жодному слова не даєш?", a_exp:'r_close_talk'},
+
+{ per:'dt', text:"е-е.", d_exp:'worry_a', a_exp:'l_close'},
+{ per:'dt', text:"що мені йому сказати ? "},
+{ per:'dt', text:"що мені йому сказати ?  що я 'моїх великих поней' у дитинсті дивився?", d_exp:'worry'},
+
+{ per:'d', text:"в мене нічого.", d_exp:'worry_talk', a_exp:'l_tease'},
+
+{ per:'a', text:"...", d_exp:'worry_a_blush'},
+
+{ per:'dt', text:"блять!"},
+{ per:'dt', text:"блять! <br>він баче що я брешу..."},
+
+{ per:'dt', text:"мене як книгу читати..."},
+{ per:'dt', text:"мене як книгу читати..."},
+
+{ per:'d', text:"ти ігри любиш? які?", d_exp:'worry_a_talk', a_exp:'l_bored'},
+
+{ per:'a', text:"шутери від першого лиця, бейбііі!!", a_exp:'l_close_talk', d_exp:'worry_a'},
+
+{ per:'dt', text:"ох. йому ТАКІ ігри подобаються.", a_exp:'l_okay'},
+
+{ per:'dt', text:" бля.", d_exp:'worry'},
+
+{ per:'dt', text:"я занадто тривожний для них..."},
+
+{ per:'a', text:"а, і типу мійкрафт теж.", a_exp:'l_neu_talk', d_exp:'worry_a'},
+
+{ per:'d', text:"ох. чудово.", d_exp:'neu_talk', a_exp:'l_neu'},
+
+{ per:'d', text:"обожнюю мійкрафт."},
+
+{ per:'a', text:"можу поставити нам сервер..?", a_exp:'l_tease_talk', d_exp:'neu', saveCookie:'intro_buildblock_unlocked'},
+
+{ per:'dt', text:"цей хлопець знає як знаходити друзів...", a_exp:'l_tease', d_exp:'smile'},
+
+{ choices: start_choices, unlock:"door_dialogue"},
+
+]
+
+let leg_dialogue=[
+
+{ per:'d', text:"твоя нога...", d_exp:'worry_talk',  a_exp:'l_bored'},
+{ per:'d', text:"як... як це... сталося?", d_exp:'worry_a_talk',  a_exp:'l_bored'},
+{ per:'a', text:"не скажу.", musicPause:true, d_exp:'worry_a_gasp',  a_exp:'l_annoyed'},
+{ per:'d', text:"що- чому?", d_exp:'amused', a_exp:'l_bored'},
+{ per:'a', text:"це весела таємничка про мене, чи ні? ", d_exp:'worry_a_talk', a_exp:'r_close_talk'},
+{ per:'a', text:"ууу, що у цього хлопця з ногою, це був нещасний випадок чи може...", a_exp:'r_neu_talk', d_exp:'worry_a'},
+{ per:'a', text:"ууу, що у цього хлопця з ногою, це був нещасний випадок чи може... <i>щось інше...?</i>", a_exp:'l_tease_talk'},
+
+{ per:'a', text:"ми зустрілися хвилину тому, але тобі вже так цікаво дізнатися про мене~", a_exp:'l_close_talk'},
+{ per:'a', text:"ми зустрілися хвилину тому, але тобі вже так цікаво дізнатися про мене~ нащо мені це прибирати?", a_exp:'l_neu_talk'},
+
+{ per:'d', text:"я просто...", d_exp:'worry_a_talk', a_exp:'l_neu'},
+{ per:'dt', text:"хвилююся за тебе?", d_exp:'worry'},
+
+{ per:'a', text:"якщо СПРАВДІ хочеш знати, я розкажу тобі. рано чи пізно.", d_exp:'worry_a', a_exp:'l_okay_talk'},
+
+{ per:'dt', text:"... ну, доки твій лікар знає...", musicPlay:"mondayhopes_oj_on_the_table.mp3", d_exp:'worry', a_exp:'l_okay'},
+
+{ choices: start_choices, unlock:"door_dialogue"},
+
+]
+
+let door_dialogue=[
+
+{ per:'d', text:"кого ти чекав при вході?", d_exp:'worry_a_talk'},
+{ per:'a', text:"га?", d_exp:'worry_a', a_exp:'l_bored'},
+{ per:'d', text:"коли я лише прийшов, я пам'ятаю як ти хотів когось побачити.", a_exp:'l_bored', d_exp:'worry_a_talk'},
+{ per:'a', text:"...oх! екс!", d_exp:'worry_a', a_exp:'r_surprised'},
+{ per:'d', text:"екс?", d_exp:'worry_a_talk', a_exp:'r_annoyed'},
+{ per:'a', text:"так. екс. колишню, тобто.", d_exp:'worry_a'},
+{ per:'a', text:"от щойно було таке неприємне розставання... ", d_exp:'worry_a'},
+{ per:'a', text:"от щойно було таке неприємне розставання...  <br> я думав вона повна милашка, але вона все одно мене залишила. "},
+{ per:'a', text:"але, знаєш, я вже декілька днів сиджу та чекаю коли вона повернеться і віддасть мені речі які я в неї залишив, але вона просто...", a_exp:'r_annoyed'},
+{ per:'a', text:"... не приходить?"},
+
+{ per:'d', text:"...відстій.", a_exp:'r_bored', d_exp:'worry_a_talk'},
+{ per:'a', text:"як в тебе з романтикою?", a_exp:'l_neu_talk', musicPause:true, d_exp:'worry_a_gasp'},
+{ per:'d', text:"а?", a_exp:'l_tease'},
+{   per:'a', text:"ну, не може бути що в ТЕБЕ з усіх людей не має дівчини... *миг*", a_exp:'l_tease_talk'},
+{ per:'d', text:"а- я-", d_exp:'worry_gasp', a_exp:'l_tease'},
+{ musicPlay: "michelcMusic_stranger.wav", per:'dt', text:"ДІВЧИНА. ДІВЧИНА? В МЕНЕ НІКОЛИ НЕ БУЛО ДІВЧИНИ!!! БЛЯ. ЩО РОБИТИ.", d_exp:'amused'},
+
+{  choices: gf_choices },
+]
+
+let lie_dialogue=[
+
+{ per:'d', text:"я... мав декого раніше.", d_exp:'worry_gasp'},
+{ per:'a', text:"справді?", d_exp:'worry', a_exp:'l_neu_talk'},
+{ musicPause:true, per:'d', text:"так.  вона була моєю подругою, але...", d_exp:'worry_a_gasp', a_exp:'l_neu'},
+{ per:'d', text:"так.  вона була моєю подругою, але..<br>ми розсталися.",  d_exp:'worry_a_talk', achDisplay:"ach_intro_lie"},
+{ per:'d', text:"tнасравді, це не були реальн-"},
+{ per:'d', text:"насравді, це не були реальн- РЕАЛЬНО СЕРЙОЗНІ-", a_exp:'l_tease', d_exp:'worry_gasp'},
+{ per:'d', text:"насравді, це не були реальн- РЕАЛЬНО СЕРЙОЗНІ- <br>стосунки.", d_exp:'worry_a_talk', a_exp:'l_neu',},
+{ per:'d', text:"в мене ніколи не було...", d_exp:'worry_a_gasp'},
+{ per:'d', text:"в мене ніколи не було... дівчини...", d_exp:'worry_a_talk'},
+{ per:'d', text:"в мене ніколи не було... дівчини... прям ось так..."},
+{ per:'a', text:"гм. тоді...", a_exp:'l_bored', d_exp:'worry_a'},
+{ per:'a', text:"як в тебе з хлопцями?", a_exp:'l_close_talk'},
+
+
+{ per:'d', text:"я...", a_exp:'l_tease', d_exp:'neu_talk'},
+{ per:'d', text:"чекай.", d_exp:'neu'},
+{ per:'d', text:" "},
+{ per:'d', text:`ти що, питаєш чи я гей ?`, d_exp:'worry_a_talk'},
+
+{ per:'a', text:"oй.", a_exp:'r_surprised', d_exp:'worry_a'},
+{ per:'a', text:"а."},
+{ per:'a', text:"тобто.", a_exp:'final1'},
+{ per:'a', text:"ти"},
+{ per:'a', text:"тиии"},
+{ per:'a', text:"тиииии", d_exp:'amused'},
+{ per:'a', text:"тииииии НЕ", a_exp:'final2'},
+{ per:'a', text:"тииииии НЕЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ Г"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕЕЕЕЙ" , a_exp:'final3'},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕЕЕЕЙ...?", d_exp:'amused'},
+
+{ done: true },
+
+]
+
+
+let truth_dialogue=[
+
+{ per:'d', text:"я... мав декого раніше.", d_exp:'worry_a_gasp'},
+{ per:'a', text:"справді?", d_exp:'worry_a',  a_exp:'l_neu_talk'},
+{ musicPause:true, per:'d', text:"так, але...", d_exp:'worry_a_talk',  a_exp:'l_neu'},
+{ per:'d', text:"так, але... це не були... реальні стосунки.", d_exp:'worry_talk', achDisplay:"ach_intro_truth",  a_exp:'l_bored'},
+{ per:'d', text:"вона мені була просто подруга, і я..."},
+{ per:'d', text:"вона мені була просто подруга, і я... хотів щось довести собі?", d_exp:'worry_a_gasp'},
+{ per:'d', text:"тож... одного разу ми прикинулися парою, але.", d_exp:'worry_a_talk'},
+{ per:'d', text:"в мене ніколи не було..."},
+{ per:'d', text:"в мене ніколи не було... дівчини...", d_exp:'worry_talk'},
+{ per:'d', text:"в мене ніколи не було... дівчини... прям ось так."},
+{ per:'a', text:"цікаво... тоді...", a_exp:'r_surprised'},
+{ per:'a', text:"як в тебе з хлопцями? ані краще?", a_exp:'l_close_talk'},
+
+{ per:'d', text:"я...", a_exp:'l_neu', d_exp:'neu_talk'},
+{ per:'d', text:"чекай.", d_exp:'neu'},
+{ per:'d', text:" "},
+{ per:'d', text:`ти що, питаєш чи я гей ?`, d_exp:'worry_a_talk'},
+
+{ per:'a', text:"oй.", a_exp:'r_surprised', d_exp:'worry_a'},
+{ per:'a', text:"а."},
+{ per:'a', text:"тобто.", a_exp:'final1'},
+{ per:'a', text:"ти"},
+{ per:'a', text:"тиии"},
+{ per:'a', text:"тиииии", d_exp:'amused'},
+{ per:'a', text:"тииииии НЕ", a_exp:'final2'},
+{ per:'a', text:"тииииии НЕЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ Г"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕ"},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕЕЕЕЙ" , a_exp:'final3'},
+{ per:'a', text:"тииииии НЕЕЕЕЕЕЕЕЕ ГЕЕЕЕЕЕЙ...?", d_exp:'amused'},
+
+{ done: true },
+
+
+]
+
+//PLEASE INCLUDE HOBBIES DIALOGUE
+
+// CHOICES ENGINE 
+
+function generateChoices(current_choices){
+
+
+const choicebox = document.getElementById('choices_list');
+choicebox.innerHTML=''; // clearing the box of all options
+
+for (const choice of current_choices) {
+  const newButton = document.createElement("button");  
+  let new_act='hideAllFast(); currDialogueCount=0; currDialogueBranch='+choice.act+'; currDialogueBranchName="'+ choice.act +'"; next_dialogue();'
+  newButton.setAttribute("onClick", new_act);
+  newButton.innerHTML=choice.title;
+  choicebox.appendChild(newButton);
+  
+  let temporary = (choice.act).toString();
+  
+  
+  if (choice.unlockable){
+  
+  let temporary_2=temporary+'_unlocked';
+  if( (localStorage.getItem(temporary_2))=='true'){
+  newButton.classList.remove('hidden');
+  newButton.classList.add('block');
+  }else{
+  newButton.classList.add('hidden');
+  newButton.classList.remove('block');
+  }
+  }
+  
+  
+  console.log(temporary+' < is temporary');
+  
+  console.log(localStorage.getItem(temporary) + ' < is the data we get from temporary')
+  if( (localStorage.getItem(temporary))=="true" ){
+  newButton.classList.add('hidden');
+  newButton.classList.remove('block');
+
+  }
+  
+  
+  }
+  
+  
+  
+}
+
+
+// WEBSITE LOAD FUNCTION:
+
+document.addEventListener( "DOMContentLoaded", function(){
+
+localStorage.setItem("start_dialogue", false);
+localStorage.setItem("rules_dialogue", false);
+localStorage.setItem("name_dialogue", false);
+localStorage.setItem("art_dialogue", false);
+localStorage.setItem("hobbies_dialogue", false);
+
+localStorage.setItem("theatre_dialogue", false);
+
+localStorage.setItem("lie_dialogue", false);
+localStorage.setItem("truth_dialogue", false);
+
+
+localStorage.setItem("leg_dialogue_unlocked", false);
+localStorage.setItem("leg_dialogue", false);
+
+localStorage.setItem("door_dialogue", false);
+localStorage.setItem("door_dialogue_unlocked", false);
+
+
+
+hideAllFast();
+
+next_dialogue();
+
+});
+
+
+// ON ENTER
+
+window.addEventListener("keydown", function(e) {
+  if (e.code === "KeyZ") {
+    e.preventDefault();
+    document.getElementById("nextAction").click();
+	
+  }else if (e.key === "z"){
+      e.preventDefault();
+    document.getElementById("nextAction").click();
+
+  }
+}); 
+
+
+function hideAllFast(){
+
+$("#choices_list").hide();
+$("#d_thought").hide();
+$("#d_text").hide();
+$("#a_text").hide();
+
+}
+
+function hideAll(){
+
+$("#choices_list").fadeOut(500);
+$("#d_thought").fadeOut(500);
+$("#d_text").fadeOut(500);
+$("#a_text").fadeOut(500);
+
+}
+
+// nextAction
+
+let currDialogueBranch=start_dialogue;
+let currDialogueBranchName="start_dialogue";
+let currDialogueCount=0;
+
+function next_dialogue(){
+if (currDialogueCount < currDialogueBranch.length){
+text_Engine(currDialogueCount);
+
+currDialogueCount+=1;
+}
+
+}
+
+
+// TEXT ENGINE HELLO BBG!
+
+
+function text_Engine(key){
+			let line = currDialogueBranch[key];
+			
+			// DETERMINES WHO SPEAKS
+			
+			if (line.per == 'dt') {
+					$("#d_thought").fadeIn(500);
+					$("#d_thought").html('('+line.text+')');
+			}else if(line.per == 'd'){
+					$("#d_text").fadeIn(500);
+					if (isMobile()) {
+					$("#d_text").html('ДІМА: '+line.text);					
+					}else{
+					$("#d_text").html(line.text);
+					}
+
+			}else if(line.per == 'a'){
+					$("#a_text").fadeIn(500);
+					if (isMobile()) {
+					$("#a_text").html('АКРИЛ: '+line.text);					
+					}else{
+					$("#a_text").html(line.text);
+					}					
+			}
+			
+			
+			// CHECKS ADDITIONAL SETTINGS
+			
+			
+				if (line.hide) { // this gotta be an array btw
+					for (var i in line.hide) {
+						console.log(line.hide[i]);
+						$(line.hide[i]).stop();
+						$(line.hide[i]).fadeOut(500);
+					}
+				}
+				
+				
+				if (line.d_exp) { 
+				
+				//					$("#d_exp").addClass('squishing');
+
+					$("#d_exp_new").fadeOut(0);
+					document.getElementById('d_exp_new').style.backgroundImage="url( {{'/' | url}}" + "imgs/comics_1_game/d_" + line.d_exp +".png " + ")";
+					
+					$("#d_exp_new").fadeIn(105);
+
+					setTimeout(
+					function() 
+					{
+						document.getElementById('d_exp').style.backgroundImage="url( {{'/' | url}}" + "imgs/comics_1_game/d_" + line.d_exp +".png " + ")";
+
+				// 					$("#d_exp").removeClass('squishing');
+					}, 80); 
+				}
+				
+				if (line.a_exp) { 
+					$("#d_exp_new").fadeOut(0);
+					document.getElementById('a_exp_new').style.backgroundImage="url( {{'/' | url}}" + "imgs/comics_1_game/a_" + line.a_exp +".png " + ")";
+					
+					$("#a_exp_new").fadeIn(105);
+
+					setTimeout(
+					function() 
+					{
+						document.getElementById('a_exp').style.backgroundImage="url( {{'/' | url}}" + "imgs/comics_1_game/a_" + line.a_exp +".png " + ")";
+
+					}, 80);
+					  
+				}
+		
+		
+			if (line.unlock) {
+				let temporaryy = (line.unlock.toString()+'_unlocked');
+				localStorage.setItem(temporaryy, true);
+			}
+			
+			if (line.choices) {
+					$("#choices_list").fadeIn(2000);
+					generateChoices(line.choices);
+			}
+			
+			
+			if (line.saveCookie) {
+				let temporaryy = (line.saveCookie.toString());
+				localStorage.setItem(temporaryy, true);
+			}
+			
+			if (line.achDisplay){
+					showNewAchievement(line.achDisplay);
+			}
+			
+			
+			if (line.musicPause){
+			pauseAudio();
+			}
+			
+						
+			if (line.musicPlay){
+			playAudio(line.musicPlay)			
+}
+			
+			if (line.done) {
+			window.location.href = "./31.html";
+			}
+			
+			
+			if (currDialogueCount==0) {
+			localStorage.setItem(currDialogueBranchName, false);
+			}
+			
+			if (currDialogueCount>0) {
+			localStorage.setItem(currDialogueBranchName, true);
+			}
+			
+}
+</script>
+
+
+
+<!-- PRELOAD IMAGES -->
+<div class='opacity-[1%]' id='preload_img'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_amused.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_neu.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_neu_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_neu_gasp.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_blush.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_gasp.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_smile.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_smile_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_a_blush.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_a_gasp.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_a.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/d_worry_a_talk.png'>
+
+<img src='{{'/' | url}}imgs/comics_1_game/a_final1.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_final2.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_final3.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_annoyed.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_bored.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_close.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_close_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_excited.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_excited_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_neu.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_neu_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_okay.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_okay_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_tease.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_l_tease_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_r_annoyed.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_r_bored.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_r_neu.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_r_neu_talk.png'>
+<img src='{{'/' | url}}imgs/comics_1_game/a_r_surprised.png'>
+
+<script>
+//LOADING SCRPTPTTT
+var boxess=document.getElementById('preload_img');
+
+var gamebox=document.getElementById('gamebox');
+
+var gameLOAD=document.getElementById('gamebox_LOAD');
+
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  gamebox.style.display='none';
+  gameLOAD.style.display='block';
+});
+
+window.addEventListener("load", (event) => {
+  console.log("page is fully loaded");
+  gameLOAD.style.display='none';
+  gamebox.style.display='block';
+  boxess.style.display='none';
+});
+
+</script>
+
+
+</div>

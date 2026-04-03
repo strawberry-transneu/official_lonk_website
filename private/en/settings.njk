@@ -1,0 +1,265 @@
+---
+ 
+title: USER SETTINGS | Losers of Near-Kyiv
+---
+<div class='min-h-[85vh] grid grid-cols-[1fr] md:grid-cols-[1fr_3fr] bg-dark-force text-light-force'>
+
+<div class='flex flex-col gap-2 p-8 align-center'>
+<img alt='' style='box-shadow: 5px 5px 0px 0px rgb(0,0,0);' class='border-dashed border-light border-2 pfp w-[70%] md:w-full '>
+<h1 class='font-bold text-[1.5em] username'>USER SETTINGS</h1>
+
+<p class='font-bold text-[1em] join_date'>JOINED: </p>
+
+<h2>achievements:</h2>
+
+<div id='ach_tiny' class='flex flex-wrap w-full'>
+
+</div>
+
+</div>
+
+<div class='p-8 bg-light text-fortext relative'>
+
+<h2>📝 PICK YOUR NAME</h2>
+<input class='bg-white text-rose-400' id='namehere' placeholder='?????' type='text'>
+<button onclick='changeName()'>set</button>
+
+<h2>🖼️ PICK YOUR PROFILE IMAGE</h2>
+
+{%include 'profile.njk'%}
+
+<h2>🏆 ACHIEVEMENTS</h2>
+
+<button id='ssspread' onclick='showBox("ssspread");' class='button-none text-left w-full font-punk3 text-dark-force hover:bg-orange-300 bg-orange-200 p-2 text-[1.1em]'>open the achievements bag</button>
+
+
+<div id='ssspread_box' class='hidden'>
+
+<div id='ach_holder' class='bg-black w-full grid grid-cols-[1fr_1fr_1fr] grid-rows-[1fr_1fr] text-[0.8em] gap-2 p-4 text-black *:bg-white *:p-2'>
+</div>
+
+</div>
+
+
+<h2>🔒 SPOILERS-FREE MODE:</h2> <u id='s_status'>currently ON</u> <button onclick='s_mode();'>CHANGE ?</button>
+
+<script>
+
+const nameinput=document.getElementById('namehere');
+
+function changeName(){
+localStorage.setItem('username', nameinput.value);
+alert('name was changed! try to reload the page');
+}
+
+const s_state=localStorage.getItem('spoiler_state');
+const s_show_text=document.getElementById('s_status');
+if (s_state==='true'){
+s_show_text.innerHTML='currently ON ✅';
+}else if (s_state==='false'){
+s_show_text.innerHTML='currently OFF ❌';
+}
+
+function s_mode(){
+
+if (s_state==='true'){
+ localStorage.setItem("spoiler_state", 'false');
+ alert('state was changed! try to reload the page');
+
+}else if (s_state==='false'){
+ localStorage.setItem("spoiler_state", 'true');
+ alert('state was changed! try to reload the page');
+}
+
+}
+
+</script>
+
+
+<!-- SAVE / LOADING -->
+<button onclick='cutetoggle()' class='button-none w-full text-left p-2 bg-white text-dark-force hover:bg-rose-100 text-dark-force'>
+💾 CLICK HERE TO ACCESS/TRANSFER YOUR SAVE FILE</button>
+
+<div id='saveboxbig' class='hidden grid-cols-2 gap-2 w-full *:w-full grid'>
+
+<div>
+<h2>SAVE YOUR DATA</h2>
+
+<div id='old_data' class='opacity-75 break-words overflow-y-scroll h-[20vh] bg-white text-zinc-400'>
+YOUR EXISTING DATA
+</div>
+<button onclick='copyOldData();'>COPY OLD DATA</button>
+</div>
+
+<div class='flex flex-col'>
+<h2>LOAD NEW DATA</h2>
+<textarea id='new_data' class='resize-none overflow-y-scroll  h-[20vh] break-words bg-white text-zinc-400'>
+</textarea>
+<button class='w-fit' onclick='setNewData();'>LOAD NEW DATA</button>
+</div>
+
+<div id='eraseall' class='col-span-2 m-2'>
+<button onclick='erase1();' class='button-none bg-black text-white w-full p-4'>ERASE ALL DATA AND FORGET IT ALL?</button>
+</div>
+
+</div>
+
+
+
+<small class='md:absolute md:mt-0 md:bottom-2 md:right-2'>your account is LOCAL TO YOUR DEVICE and is NOT STORED anywhere in the cloud!</small>
+
+</div>
+
+</div>
+
+<script>
+
+
+function cutetoggle (){
+biggest.classList.toggle('hidden');
+}
+
+const eraseall= document.getElementById('eraseall');
+
+function erase1(){
+eraseall.innerHTML=`
+<p>ARE YOU... SURE?</p>
+<button class='button-none bg-black text-white p-4' onclick='erase2();'>YES</button>
+`;
+}
+
+function erase2(){
+eraseall.innerHTML=`
+<p>YOU DON'T HAVE TO DO THIS.</p>
+<button class='button-none bg-black text-white p-4' onclick='erase3();'>I WANT TO</button>
+`;
+}
+
+function erase3(){
+eraseall.innerHTML=`
+<p>YOU WILL REGAIN ALL THE MEMORIES. YOU WILL STILL REMEMBER IT. ALL OF THIS HAVE HAPPENED... YOU SAY YOU WILL FORGET IT, BUT YOU CANNOT TRULY FORGET IT.</p>
+<button class='button-none bg-black text-red-500 font-bold p-4' onclick='eraseFinal();'>I KNOW.</button>
+`;
+}
+
+function eraseFinal(){
+newbox.value="{}";
+setNewData();
+alert('please reload the page.');
+alert('please reload the page,');
+alert('please reload the page.');
+}
+
+const box= document.getElementById('old_data');
+
+const newbox= document.getElementById('new_data');
+const biggest= document.getElementById('saveboxbig');
+
+const allStorage = { ...localStorage };
+let newtext = JSON.stringify(allStorage);
+box.innerHTML= newtext;
+var myobj = JSON.parse(newtext);
+
+// ^ GETS LOCAL DATA THAT EXISTS RN AND LOADS IT WOAH
+
+function setNewData(){
+
+
+myobj = JSON.parse(newbox.value);
+
+localStorage.clear();
+
+console.log(myobj);
+
+Object.keys(myobj).forEach(key => {
+  localStorage.setItem(key, myobj[key]);  
+});
+
+alert('new data was loaded! try to reload the page');
+
+}
+
+  const copyOldData = async () => {
+    try {
+	  let text = box.innerHTML;
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
+</script>
+
+
+
+<script>
+const holder = document.getElementById("ach_holder"); 
+const mini_holder = document.getElementById("ach_tiny"); 
+
+for (var i = 0; i < achbase.length; i++) {
+
+
+if (localStorage.getItem(achbase[i].id)=='true'){
+console.log('YAY');
+
+holder.innerHTML+= 
+`
+
+<div class='ach grid flex-grow text-center' id='` + achbase[i].id +  `'>
+<h2>⭐ `+achbase[i].title+`</h2>
+
+<img class='justify-self-center' src='{{"/"|url}}imgs/achievements/` + achbase[i].id + `.png'>
+
+<p id=' `+ achbase[i].id +`_desc'>` + achbase[i].desc + `</p>
+</div>
+
+`;
+
+mini_holder.innerHTML+=`
+<img title=' ` + achbase[i].title+ ` ' src='{{"/"|url}}imgs/achievements/` + achbase[i].id + `.png'>
+`;
+
+}else{
+console.log('NAY!');
+
+holder.innerHTML+= 
+
+`
+
+<div class='ach grid flex-grow text-center' id='` + achbase[i].id +  `'>
+<h2>`+achbase[i].title+`</h2>
+
+<img class='justify-self-center' src='{{"/"|url}}imgs/achievements/example.png'>
+
+<p id=' `+ achbase[i].id +`_desc'> [ LOCKED ] </p>
+</div>
+
+`
+
+}
+
+}
+
+/*
+const achievements = document.querySelectorAll(".ach"); 
+console.log(achievements);
+
+
+ for (let i = 0; i < achievements.length; i++) {
+
+let namesie = achievements[i].id;
+
+console.log(namesie);
+
+if (localStorage.getItem(namesie)){
+document.getElementById(namesie+'_desc').classList.remove('hidden');
+console.log(namesie +' is true, supposedly');
+}else{
+document.getElementById(namesie+'_desc').classList.add('hidden');
+}
+
+}*/
+
+
+</script>

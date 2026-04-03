@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+<html style='width:100%; height:100%' lang="{{lang}}" data-theme="white">
+
+<head>
+
+	
+	<script>
+	var achbase =[
+
+{ id:'ach_og', title:'THE COMING OUT DAY', desc:"have marked ISSUE #0 as read." },
+{ id:'ach_intro', title:"LONKIN&apos;", desc:"have marked ISSUE #1 as read." },
+{ title:"TALK IT OUT", id:'ach_intro_exh', desc:'exhausted all options when talking to acryl in the ISSUE #1 minigame'},
+{ title:"LIAR, LIAR", desc:'have lied to acryl in the ISSUE #1 minigame', id:'ach_intro_lie'},
+{ title:"UNEXPECTED HONESTY", desc:'told the truth to acryl in the ISSUE #1 minigame', id:'ach_intro_truth'},
+{ title:"DUALITY OF MAN", desc:"got both LIAR, LIAR and UNEXPECTED HONESTY achievements by rereading the comic", id:'ach_intro_truthlie'},
+{ title:"LUCKY CLOVER", id:'ach_luckyread', desc:'found this achievement in taglines on the read page'},
+
+];
+
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="description" content="Read Losers of Near-Kyiv, that one weird ukrainian webcomic on it's official website!">
+  <meta name="keywords" content="webcomic">
+  <meta charset="UTF-8" />
+  <title>{{title}}</title>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="{{ '/' | url }}imgs/favicon.ico">
+  
+      <link rel="stylesheet" type="text/css" href="{{ '/' | url }}fonts/style.css"/>
+  
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<style type="text/tailwindcss">
+	@theme {
+  --animate-wiggle: wiggle 7s ease-in-out infinite;  
+  @keyframes wiggle 
+  { 
+    10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(3px, 0, 0);
+  }
+  }
+  
+	
+	--color-fortext: #380404;
+	--color-buttontext: white;
+	
+	--color-misha: #022270;
+	--color-zaria: #4a9333;
+	--color-acryl: #b99111;
+	--color-dima: #a50505;
+
+	--background-image-pattern-star: url("{{'/'|url}}imgs/pattern_star.png");
+	--background-image-home: url('{{ '/' | url }}./imgs/bg_checker.png');
+	--background-image-cardboard: url('{{ '/' | url }}./imgs/cardboard.png');
+	--background-image-paper: url('{{ '/' | url }}./imgs/seamless.png');
+	--background-image-darkpaper: url('{{ '/' | url }}./imgs/dark_seamless.png');
+	--color-dark: #59423F;
+	--color-dark-force: #59423F;
+	--color-light: #EBE4DB;
+	--color-light-force: #EBE4DB;
+	--color-highlight: oklch(89.2% 0.058 10.001);
+		
+		--color-white-adapt: white;
+	--color-black-adapt: black;
+
+	
+	--background-image-paper-force: url('{{ '/' | url }}./imgs/seamless.png');
+
+	--font-loverboy: "Loverboy", "Courier New", Courier, monospace; 
+
+	--font-mau: "Mau", "Courier New", Courier, monospace; 
+
+	--font-sans: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+
+
+	--font-cmu: "CMU Typewriter Text Regular", "Courier New", Courier, monospace; 
+	--font-block: "block", "Courier New", Courier, monospace;
+	--font-spike: "spike", "Courier New", Courier, monospace;
+	--font-punk: "punk_01", 'block', "Courier New", Courier, monospace;
+		--font-punk2: "punk_03", "Courier New", Courier, monospace;
+		--font-punk3: "punk_05", "Courier New", Courier, monospace;
+		--font-punk4: "punk_07", "Courier New", Courier, monospace;
+
+	}
+	
+	
+  [data-theme='default_dark'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/dark_bg_checker.png');
+	--color-dark: #59423F;
+  }	
+				
+  [data-theme-primary='dark']{
+   --color-dark: white;
+   --color-light: #242020;
+   --color-fortext: #E1D7CC;
+   --color-buttontext: #242020;
+   --color-highlight: black;
+--color-white-adapt: black;
+	--color-black-adapt: white;
+   --background-image-cardboard: url('{{ '/' | url }}./imgs/dark_cardboard.png');
+   --background-image-darkpaper: url('{{ '/' | url }}./imgs/dark_dark_seamless.png');
+   --background-image-paper: url('{{ '/' | url }}./imgs/dark_mode_seamless.png');
+   
+	--background-image-pattern-star: url("{{'/'|url}}imgs/dark_pattern_star.png");
+  }
+  
+  [data-theme='zaria'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/zaria_bg_checker.png');
+	--color-dark: #59423F;
+  }	
+  
+   [data-theme='zaria_dark'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/zaria_bg_checker_dark.png');
+	--color-dark: #59423F;
+  }	
+  
+  [data-theme='misha'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/misha_bg_checker.png');
+	--color-dark: #59423F;
+  }	
+  
+   [data-theme='misha_dark'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/misha_bg_checker_dark.png');
+	--color-dark: #59423F;
+  }	
+
+  [data-theme='acryl'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/acryl_bg_checker.png');
+	--color-dark: #59423F;
+  }	
+  
+  [data-theme='acryl_dark'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/acryl_bg_checker_dark.png');
+	--color-dark: #59423F;
+  }	  
+
+  [data-theme='dima'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/dima_bg_checker.png');
+	--color-dark: #59423F;
+  }	
+  
+  
+  [data-theme='dima_dark'] {
+	--background-image-home: url('{{ '/' | url }}./imgs/dima_bg_checker_dark.png');
+	--color-dark: #59423F;
+  }	
+  
+  
+  
+  .lonkin{
+  @apply text-rose-200 decoration-2 underline font-black text-[1.1em];
+  }
+  
+  .mirror{
+  display:inline-block; transform: scale(-1, 1);
+  }
+  
+  .flip{
+  display:inline-block; transform: scale(1, -1);
+  }
+  
+  .text-outline{	
+  -webkit-text-stroke: 1px black;
+  text-shadow: 4px 4px 0px black;
+  }
+  
+  .text-outline-5{	
+  -webkit-text-stroke: 0.7px black;
+  text-shadow: 4px 4px 0px black;
+  }
+  
+	a {
+	@apply underline decoration-[3px];
+	}
+
+  
+	blockquote {
+	@apply bg-cardboard bg-size-[100%_100%] text-white py-2 inline-block -skew-x-8;
+	}
+		
+	
+	body {
+	@apply bg-size-[145px];
+	}
+	
+	li{
+	list-style-type: "\2606";
+	margin-left: 1.20em;
+	padding-inline-start: 0.5em;
+	}
+
+	.flex-center{
+	@apply flex justify-center items-center;
+	}
+  
+	@layer base {  
+	
+	h1 {    
+	@apply text-[1.35em] md:text-[1.65em] font-punk;
+	font-weight: 400;}  
+	
+	h2 {    
+	text-size: 1.25em; 
+	font-weight: bold;}
+	
+	h3 {    
+	text-size: 1.20em; 
+	margin-left: 1em;
+	font-weight: bold;}
+	
+	u {
+	@apply decoration-2;
+	}
+		
+	.rainbow-order > *:nth-child(1n){
+	@apply bg-rose-300;
+	}
+	
+	.rainbow-order > *:nth-child(2n){
+		@apply bg-orange-200;
+
+	}
+		.rainbow-order > *:nth-child(3n){
+		@apply bg-cyan-200;
+
+	}
+	
+	.rainbow-order > *:nth-child(4n){
+		@apply bg-blue-200;
+
+	}
+	
+	.dima-border{
+	border-image-slice: 4% 3% 5% 2%;
+border-image-width: 0.3em 0.3em 0.3em 0.3em;
+border-image-outset: 0px 0px 0px 0px;
+border-image-repeat: stretch stretch;
+border-image-source: url("{{ '/' | url}}imgs/border_dima.png");
+border-style: solid;
+	}
+	
+	
+	.acryl-border{
+	border-image-slice: 4% 3% 5% 2%;
+border-image-width: 0.3em 0.3em 0.3em 0.3em;
+border-image-outset: 0px 0px 0px 0px;
+border-image-repeat: stretch stretch;
+border-image-source: url("{{ '/' | url}}imgs/border_acryl.png");
+border-style: solid;
+	}
+	
+		.rainbow-order-hover > *:nth-child(1n of :not(.hidden)){
+	@apply bg-rose-300 hover:bg-rose-400;
+	}
+	
+	.rainbow-order-hover > *:nth-child(2n of :not(.hidden)){
+		@apply bg-orange-200 hover:bg-orange-300;
+
+	}
+		.rainbow-order-hover > *:nth-child(3n of :not(.hidden)){
+		@apply bg-cyan-200 hover:bg-cyan-300;
+
+	}
+	
+	.rainbow-order-hover > *:nth-child(4n of :not(.hidden)){
+		@apply bg-blue-300 hover:bg-blue-400;
+
+	}
+	
+	
+	.button:not(.button-none), button:not(.button-none) {
+	border: solid 4px black;
+	@apply px-[0.3em] py-[0.5em] md:px-[0.4em] md:py-[0.2em] hover:bg-[url("{{ '/' | url}}imgs/dark_mode_seamless.png")] font-bold text-white bg-dark bg-darkpaper bg-size-[120px] text-buttontext;
+	box-shadow: 3px 3px 0px 0px rgba(40,0,0,0.7);
+	
+	margin: 2px;
+
+	text-decoration: none !important;
+	}
+	
+	
+	
+  
+	}
+	
+	.jolly-text{
+--color1: #1FD537;
+--color2: #E40010;
+background: repeating-linear-gradient(
+45deg,
+var(--color1),
+var(--color1) 30px,
+var(--color2) 30px,
+var(--color2) 60px
+);
+background-clip: text;
+color: transparent;
+-webkit-background-clip: text;
+animation: 40s linear 0s infinite move;
+}
+
+@keyframes move {
+from {
+background-position: 0px;
+}
+to {
+background-position: 1000px;
+}
+}
+	
+	</style>
+	
+	
+<style>
+
+ @keyframes squish {
+  0%   {
+    transform: scaleY(100%);
+
+	}
+  100%  {
+    transform: scaleY(99%) translateY(1%) scaleX(101%);
+
+	}
+}
+
+.squishing {
+  animation-name: squish;
+  animation-iteration-count: 2;
+  animation-duration: 0.1s;
+  animation-direction: alternate;
+} 
+</style>
+
+
+</head>
+
+
+<body class='addtransitions font-cmu text-[1.15em] md:text-[1.25em] bg-home text-fortext min-w-0'>
+<div class='flex justify-center items-center flex-col *:min-w-0'>
+<div id='normal' class='min-w-0 *:min-w-0 hidden w-[100%] md:w-[95%] lg:w-[85%]'>
+
+<header class='flex flex-row gap-1 m-2 justify-between items-center'>
+
+<a class='inline-block w-[35%] md:w-[18%] h-auto' href="{{ '/' | locale_url }}">
+
+<img class='' src="{{ '/' | url }}imgs/logo.png" alt='homepage'>
+
+
+</a>
+
+<div class='lg:hidden block w-full text-fortext bg-light'><button id='menu-btn' class='w-full'>= MENU</button></div>
+
+
+<div aria-hidden="true" id="menu" class="fixed z-[9999] top-0 left-0 w-[100%] md:w-[80%] h-full bg-[#3d2621] overflow-y-auto text-white p-4 shadow-lg transform -translate-x-full transition-transform duration-300 ease-out lg:hidden">
+
+<button id="close-btn" class="z-[9999] text-white text-[1.5em] absolute top-2 right-4 px-4 ">X </button>
+ <nav class='h-full'>
+
+
+<div class='relative  flex flex-col *:py-2 *:text-[1.1em] *:text-fortext *:bg-light gap-4'>
+<!--<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>-->
+
+<a href="{{ '/' | locale_url }}">🏡home</a>
+
+
+<a href="{{ '/' | locale_url }}read">📚read</a>
+
+
+<div id='community_link_m'>
+<a href="{{ '/' | locale_url }}community">🌻community</a>
+</div>
+
+<div id='help_link_m'>
+<a href="{{ '/' | locale_url }}help_us">❣️HELP US!</a>
+</div>
+
+<a href='{{ "/" | locale_url }}content_warnings'>⚠️CWs</a>
+
+<div class='flex gap-2 flex-row '>
+<button class='p-0 bg-dark-force text-light-force bg-none border-0' aria-hidden="true" onclick='setThemePrimary("default"); setTheme("default");'>☀️ LIGHT MODE</button>
+<button class='p-0 bg-dark-force text-light-force bg-none border-0' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 DARK MODE</button>
+</div>
+
+<button aria-label='open user settings menu' onclick='togglePFPMenu();' class=' text-light-force flex justify-center items-center m-0 p-0 border-0 gap-2'>
+<img id='pfp' alt='user options' class='w-12 h-12 gap-2 pfp'>
+<div>USER SETTINGS</div> 
+</button>
+
+<ul id='pfpmenu' class='hidden w-full absolute p-2 z-10 top-[100%]'>
+
+<li>hello <span class='username'></span>!</li>
+<li><a href='{{ '/' | locale_url }}./settings'>⚙️ settings</a></li>
+</ul>
+
+
+</div>
+</nav>
+
+</div>
+
+
+
+
+<nav class='hidden lg:flex relative bg-cardboard bg-cover flex-grow flex-1 grid grid-cols-4 grid-rows-1 justify-end items-center flex-row self-stretch *:bg-light gap-4'>
+
+<!--<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>-->
+
+
+<a href="{{ '/' | locale_url }}">🏡home</a>
+
+
+<a href="{{ '/' | locale_url }}read">📚read</a>
+
+
+<div id='community_link'>
+<a href="{{ '/' | locale_url }}community">🌻community</a>
+</div>
+
+<div id='help_link'>
+<a href="{{ '/' | locale_url }}help_us">❣️HELP US!</a>
+</div>
+<a href='{{ "/" | locale_url }}content_warnings'>⚠️CWs</a>
+
+<button class='p-0 bg-light bg-none border-0' aria-hidden="true" onclick='setThemePrimary("default"); setTheme("default");'>☀️</button>
+<button class='p-0 bg-light bg-none border-0' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒</button>
+
+<button aria-label='open user settings menu' onclick='togglePFPMenu();' class='m-0 p-0 border-0  mr-12'>
+<img id='pfp' alt='user options' class='w-12 aspect-square pfp'>
+</button>
+
+<ul id='pfpmenu2' class='hidden md:max-w-[20vw] absolute p-2 z-10 top-[100%]'>
+<!--
+<li>ACHIEVEMENTS</li>
+<li>THEME SELECTOR</li>
+<li>PROFILE PICTURES</li>
+-->
+<li>hello <span class='username'></span>!</li>
+<li><a href='{{ '/' | locale_url }}./settings'>⚙️ settings</a></li>
+</ul>
+
+<!--
+<button onclick='setTheme("default");'>no theme</button>
+<button onclick='setTheme("misha");'>misha</button>
+<button onclick='setTheme("acryl");'>acryl</button>
+<button onclick='setTheme("dima");'>dima</button>
+<button onclick='setTheme("zaria");'>zaria</button>
+-->
+</nav>
+</header>
+
+<main class='flex m-4 justify-center items-center flex-col min-w-0 bg-light'>
+
+
+{% block inside %}
+{{ content | safe }}
+{% endblock %}
+</main>
+
+<footer class='bg-cardboard text-white flex-col bg-cover flex-center p-2'>
+
+<div>
+
+<div class='flex flex-col md:flex-row gap-2'>
+
+<div class='flex flex-row gap-2'>
+<a href="https://www.pinterest.com/losersofnearkyiv/" target="_blank"><img alt='pinterest' class='hover:scale-111 ease-in-out duration-100 w-20 h-20 -rotate-6' src="{{'/'|url}}imgs/sm_pinterest.png"></a>
+<a href="https://ko-fi.com/losersofnearkyiv" target="_blank"><img alt='ko-fi' class='hover:scale-111 ease-in-out duration-100 w-20 h-20 rotate-8' src="{{'/'|url}}imgs/sm_ko-fi.png"></a>
+<a href="https://neocities.org/site/losersofnear-kyiv" target="_blank"><img alt='neocities' class='hover:scale-111 ease-in-out duration-100 w-20 h-20 -rotate-5' src="{{'/'|url}}imgs/sm_neocities.png"></a>
+<a href="https://www.tumblr.com/losers-of-near-kyiv" target="_blank"><img alt='tumblr' class='hover:scale-111 ease-in-out duration-100 w-20 h-20 rotate-12' src="{{'/'|url}}imgs/sm_tumblr.png"></a>
+</div>
+
+<div>
+<a href='{{ "/" | locale_url }}sitecredits'>this website was made outta cardboard</a> <br> 👍 hosted with <a href='https://neocities.org'>neocities</a> support plan <br> 
+</div>
+</div>
+
+
+</div>
+
+
+
+<div class='pb-2'>
+losers of near-kyiv 🄯 <span id='year'></span> | <a href="{{ '/' | locale_url}}contact">contact us ?</a>
+</div>
+
+<div class='hidden *:transition-colors *:duration-2000 *:ease-in-out'></div>
+
+
+
+ </footer>
+ 
+</div>
+
+<div id='new_ach' style='display:none;' class='grid grid-cols-[1fr_6fr] justify-center items-center fixed right-4 z-404 bottom-4 bg-white text-black w-[70vw] md:w-[40vw] p-2 gap-2 border-black border-4'>
+<audio src='{{"/" | url}}sounds/yippie.mp3' id='ach_sound'></audio>
+<img id='new_ach_img' src='{{"/"|url}}imgs/achievements/example.png'>
+<p class='text-[0.9em]'><small><a href='{{"/"|locale_url}}settings' target='_blank'>new achievement unlocked! ⭐</a></small><br><b id='new_ach_title'>TITLE:</b><span id='new_ach_desc'>
+LOREM KLSH FLKSDHF LK  SHL:A H DKLSD HFLK  SAHD L SHFDKLS FHLDSFK HSDLK HSD LF DHSFKLDHS FKLSDH FS
+</span></p>
+</div>
+
+
+
+<div id='spoiler_screen' class='hidden w-full min-h-[100vh] bg-size-[200px_200px] text-black-adapt bg-pattern-star top-0 z-4444 flex lg:justify-center items-center flex-col'>
+
+<div class='block lg:fixed lg:left-0 lg:top-0 lg:w-[25%] w-full  text-[0.85em]   z-5555 '>
+<button onclick='localStorage.setItem("spoiler_state", "true"); location.reload();' class='button-none  w-full hover:bg-cyan-200 bg-cyan-100  p-2 text-black'>hate "tutorials"? 4th wall breaks make you tense?<br> click here to skip this part! </button>
+
+
+<div class='*:py-2 w-full hidden lg:flex flex-row *:w-full mt-2 gap-2'>
+<button class='p-0 bg-white-adapt text-black-adapt bg-none border-0 shadow-none' aria-hidden="true" onclick='setThemePrimary("default"); setTheme("default");'>☀️ LIGHT</button>
+<button class='p-0 bg-white-adapt text-black-adapt bg-none border-0 shadow-none' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 DARK</button>
+</div>
+</div>
+
+
+
+
+<div class='w-[95%] md:w-[70%] lg:w-[47%] *:w-full min-h-[80vh] justify-center flex flex-col items-center z-5555'>
+<div class=' bg-white-adapt text-black-adapt p-3 my-2'>
+
+
+<div id='talk_question' class=''>...FIRST TIME HERE?</div>
+
+</div>
+<div class=' bg-white-adapt text-black-adapt p-3 my-2'>
+
+<div id='talk_options' class='flex gap-2 flex-col'>
+<button onclick='opt_first();'>UH. I GUESS?</button>
+<button onclick='opt_notfirst();'>NO. I'VE READ THE INTRODUCTION COMIC BEFORE AND KNOW WHAT IT'S ABOUT.<br>
+I'M NO STRANGER TO YOU!</button>
+</div>
+
+
+</div>
+
+<div class='lg:hidden block'>
+<div class='*:py-2 w-full *:w-full gap-2 flex flex-row mt-2'>
+<button class='p-0 bg-white-adapt text-black-adapt bg-none border-0 shadow-none' aria-hidden="true" onclick='setThemePrimary("default"); setTheme("default");'>☀️ LIGHT</button>
+<button class='p-0 bg-white-adapt text-black-adapt bg-none border-0 shadow-none' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 DARK</button>
+</div> 
+</div>
+</div>
+
+
+
+</div>
+
+<div id='cw_screen' style='display: none;' class='w-full h-full bg-size-[200px_200px] text-black bg-[url("{{'/'|url}}imgs/pattern_star.png")]  top-0 z-4440 flex justify-center items-center flex-col py-10 px-10 md:px-20'>
+
+</div>
+
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const menu = document.getElementById('menu');
+
+    function toggleMenu() {
+        menu.classList.toggle('-translate-x-full'); 
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+</script>
+
+<script>
+
+function togglePFPMenu(){
+document.getElementById('pfpmenu').classList.toggle('hidden');
+document.getElementById('pfpmenu2').classList.toggle('hidden');
+}
+
+
+function setCookie(name, value) {
+    localStorage.setItem(name, value);  // set. also its not fr a cookie lol its localstorage
+}
+
+function getCookie(name) {
+    return localStorage.getItem(name);  // get value
+}
+
+
+function setTheme(a){
+if(a==='default'){
+document.getElementsByTagName("HTML")[0].setAttribute("data-theme", null); 
+setCookie('theme', null);
+}else{
+document.getElementsByTagName("HTML")[0].setAttribute("data-theme", a); 
+setCookie('theme', a);
+}
+}
+
+function setThemePrimary(a){
+
+if(a==='default'){
+document.getElementsByTagName("HTML")[0].setAttribute("data-theme-primary", null); 
+setCookie('primary-theme', null);
+}else{
+document.getElementsByTagName("HTML")[0].setAttribute("data-theme-primary", a); 
+setCookie('primary-theme', a);
+}
+
+}
+
+
+</script>
+
+
+<script>
+
+//THE SCRIPT FOR THE ONES ENTERING THIS. WOAH.
+
+
+ 
+// const isFirst=localStorage.getItem();
+
+ 
+// const isFirst=localStorage.getItem();
+const s_screen=document.getElementById('spoiler_screen');
+const cw_screen=document.getElementById('cw_screen');
+
+const normal=document.getElementById('normal');
+
+const talk_question=document.getElementById('talk_question');
+const talk_options=document.getElementById('talk_options');
+
+if(!localStorage.getItem("spoiler_state")){
+s_screen.classList.remove('hidden');
+}
+function opt_first(){
+talk_question.innerHTML="...WELCOME, THEN. THIS IS THE OFFICIAL WEBSITE FOR LOSERS OF NEAR-KYIV!";
+talk_options.innerHTML=
+`
+<button onclick='opt_empty()'>LOOKS EMPTY.</button>
+`
+;
+
+}
+
+
+
+function opt_empty(){
+talk_question.innerHTML=`EMPTY? I SUPPOSE IT DOES. HAHA, SORRY. <br> NO, THAT'S NOT WHAT THE WEBSITE ACTUALLY LOOKS LIKE. BUT... I THINK YOU CAME HERE FOR A STORY, DIDN'T YOU?`;
+talk_options.innerHTML=
+`
+<button onclick='opt_spoilersLocked("read");'>YES. I KNOW IT ALL! JUST LET ME READ!</button>
+<button onclick='opt_story()'>CAN YOU TELL ME ABOUT THE STORY FIRST?</button>
+<button onclick='opt_siteNote()'>...I WANNA SEE ALL OF THE WEBSITE...</button>
+
+`
+;
+
+}
+
+
+
+function opt_story(){
+talk_question.innerHTML=`OKAY. 
+
+LET ME FETCH THE DESCRIPTION... <br>
+<div class='text-center italic'>
+<img alt='Losers of Near-Kyiv' src="{{'/'|url}}imgs/logo.png" class='ease-in-out transition-all duration-1100 hover:scale-105 h-[3em] inline'>
+
+is a <strong class='underline decoration-3 decoration-dashed decoration-[#a50505]'>ANIMATED WEBSERIES</strong> CONCEPT, currently existing as a multimedia project - primarly a <strong>WEBCOMIC</strong>.
+the story follows <b>FOUR ROOMMATES:</b> <b class='text-dima'>DIMA</b>, <b class='text-acryl'>ACRYL</b>, <b class='text-zaria'>LUCHEZAR</b> and <b class='text-misha'>MIKHEI</b>, who all happen to be students in a fictional, slightly more fantasy, no-war version of <a target='_blank' href='https://en.wikipedia.org/wiki/Kyiv_Oblast'>NEAR-KYIV, UKRAINE</a>.
+<br>
+</p>
+</div>
+
+<!-- REVIEWS GO HERE -->
+<br>
+IT IS A <b>SLICE OF LIFE</b> & <b>COMEDY</b> STORY... <br>
+...BUT THERE MIGHT BE A CHANCE YOU'VE ALREADY HEARD ALL THIS. DO YOU WANT TO JUMP TO READING IT?`;
+
+talk_options.innerHTML=
+`
+<button onclick='opt_read()'>YES!</button>
+<button onclick='opt_siteNote()'>I WANT TO CHECK OUT ALL OF THE WEBSITE, ACTUALLY.</button>
+`
+;
+
+}
+
+function opt_read(){
+talk_question.innerHTML=`GOOD.`;
+talk_options.innerHTML=
+`
+<button onclick='opt_spoilersLocked("read")'>[ OPEN THE COMIC ]</button>`
+}
+
+function opt_siteNote(){
+talk_question.innerHTML=`JUST SO YOU KNOW, A SIGNIFICANT PART OF THE WEBSITE MIGHT BE LOCKED UNTIL YOU FINISH THE INTRODUCTION. THAT IS THE BEST EXPERIENCE IF THIS IS YOUR FIRST TIME, BUT...
+
+<small>[if you'll want to see everything without reading the comic, you can do so in ⚙️ user settings.]</small>
+
+`;
+talk_options.innerHTML=
+`
+<button onclick='opt_spoilersLocked()'>UNDERSTOOD! THANKS!</button>`
+}
+
+
+function opt_notfirst(){
+talk_question.innerHTML="OH. WELL. THAT'S GOOD. I ASSUME THEN YOU WOULD LIKE TO SEE ALL THAT THIS WEBSITE WOULD LIKE TO OFFER, WITHOUT ME INTERRUPTING YOU. BUT... IF YOU'RE UNSURE, OR YOU WANNA GET THE FULL FIRST-TIME EXPERIENCE... THERE'S... AN OPTION FOR THAT, TOO.";
+talk_options.innerHTML=
+`
+<button onclick='opt_spoilersUnlocked()'>I'M SURE THAT I WANT TO SEE ALL OF THE WEBSITE </button>
+<button onclick='opt_fakenewperson()'>NEVERMIND, DON'T SPOIL ME ANYTHING. FORGET ME AND TREAT ME LIKE A NEW PERSON.</button>
+`
+;
+
+}
+
+function opt_fakenewperson(){
+talk_question.innerHTML=`FORGET YOU? I... DON'T WANT TO.`;
+talk_options.innerHTML=
+`
+<button onclick='opt_forget()'>PLEASE?</button>
+`
+;
+}
+
+
+function opt_forget(){
+talk_question.innerHTML=`...<small>I GUESS IT DOESN'T MATTER MUCH, DOES IT?</small> <br>THIS JUST MEANS WE WILL MEET AGAIN. <br> I WILL SEE YOU AGAIN.`;
+talk_options.innerHTML=
+`
+<button onclick='website_spoilersLocked()'>[ OPEN THE WEBSITE ]</button>
+`
+;
+}
+
+
+function opt_spoilersUnlocked(){
+talk_question.innerHTML="I HOPE YOU WON'T REGRET YOUR DECISION. I SUPPOSE I HAVE TO SAY SOMETHING NICE... <br> <div class='w-full text-center font-block text-[1.5em] p-4 bg-black text-white' style='text-shadow: 0px 0px 2px #00d3ad, 0px 0px 5px #00d3ad, 0px 0px 1px #00d3ad; 0px 0px 10px #00d3ad'>WELCOME BACK.</div> <br> <small>[if you'll change your decision you can do so in ⚙️ user settings.]</small>";
+talk_options.innerHTML=
+`
+<button onclick='website_spoilersUnlocked();'>THANKS.</button>
+`
+;
+
+}
+
+function opt_spoilersLocked(b){
+
+talk_question.innerHTML=`ENJOY! <img class='inline' src='{{"/"|url}}imgs/a_star.gif'>`;
+talk_options.innerHTML=`
+
+
+<button onclick='website_spoilersLocked("` + b + `");'>[ OPEN THE WEBSITE ]</button>
+
+`
+
+
+
+
+}
+
+
+function website_spoilersUnlocked(){
+s_screen.classList.add('hidden');
+normal.classList.remove('hidden');
+
+localStorage.setItem('spoiler_state', 'false');
+loadSpoil();
+
+
+}
+
+
+function website_spoilersLocked(actions){
+s_screen.classList.add('hidden');
+normal.classList.remove('hidden');
+
+localStorage.setItem('spoiler_state', 'true');
+loadSpoil();
+
+}
+
+
+let cw_screen_content = `
+
+
+<div class='w-full bg-size-[200px_200px] text-fortext bg-light p-2 md:p-12'>
+
+<button class='p-0 bg-dark-force text-light-force bg-none border-0' aria-hidden="true" onclick='setThemePrimary("default"); setTheme("default");'>☀️ LIGHT MODE</button>
+<button class='p-0 bg-dark-force text-light-force bg-none border-0' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 DARK MODE</button>
+
+<h1 class='font-cmu'>
+LOSERS OF NEAR-KYIV CONTAINS A FAIR AMOUNT OF…</h1>
+<small>these are content warnings applicable FOR THE WHOLE COMIC. hover/click on the cards to find out details!</small>
+
+
+<div class="wrapper text-[0.9em] w-full flex-col md:flex-row flex flex-wrap justify-center gap-4">
+  <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='profanity' alt='profanity' class='object-cover' src="{{'/'|url}}imgs/cw_1.png">
+    <div class="info">
+   <ul>
+            <li>many of the characters swear on a very regular basis</li>
+			<li>words of choice include, but are not limited to <span class='text-black bg-blue-900 hover:bg-zinc-200 transition-all duration-1000 ease-in-out '>“hell”</span> & <span class='text-black bg-blue-900 hover:bg-zinc-200 transition-all duration-1000 ease-in-out '>“fuck”</span> & <span class='text-black bg-blue-900 hover:bg-zinc-200 transition-all duration-1000 ease-in-out '>“shit”</span></li>
+			<li>more graphic and sexual swearing is usually avoided/omitted</li>
+        </ul>
+    </div>
+  </div>
+
+  <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='religions, based off real-life ones' alt='religions, based off real-life ones' class='object-cover' src="{{'/'|url}}imgs/cw_2.png">
+    <div class="info">
+   <ul>
+            <li>main character is referred to as christian in-universe</li>
+			<li>other religions are also referenced</li>
+			<li>religion is not shown in an inherently positive or a negative light, it’s just there </li>
+        </ul>
+    </div>
+  </div>
+
+  <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='topics of discrimination' alt='topics of discrimination' class='object-cover' src="{{'/'|url}}imgs/cw_3.png">
+    <div class="info">
+	<ul><li>akin to irl misogyny & racism & etc exists</li>
+	<li>external prejudice (sometimes)</li>
+	<li>societal normativity (often)</li>
+	<li>internalization of the above, like guilt/shame/self-hatred (extremely often)</li>
+	<li>shown as negative/irrational/biased/hurtful</li></ul>
+    </div>
+  </div>
+ 
+  <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='depiction of illness (mental & physical)' alt='depiction of illness (mental & physical)' class='object-cover' src="{{'/'|url}}imgs/cw_4.png">
+    <div class="info">
+	<ul><li>anxiety attacks, panic attacks, meltdowns, flareups</li>
+	<li>chronic pain & illness</li>
+	<li>pills & medical equipment (no syringes!) is often seen</li>
+	<li>LoNK <b>avoids</b> topic of life-threatening conditions, but one of the characters clumsily mentions it in chapter 1 before the topic is changed.</li>
+	</ul>
+    </div>
+  </div> 
+  
+  
+    <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='implied pre-2022 historical events' alt='implied pre-2022 historical events' class='object-cover' src="{{'/'|url}}imgs/cw_5.png">
+    <div class="info">
+	<ul><li>2013-2015 events in Ukraine are not discussed in detail, but are implied to have happened</li>
+	<li>soviet past of Ukraine is brought up sometimes</li>
+	<li>other historical events are sometimes implied or brought up</li>
+	<li>covid pandemic is NOT implied to have happened</li>
+	</ul>
+    </div>
+  </div> 
+  
+      <div aria-haspopup="true" tabindex='1' role='button' class="card md:w-[30%] w-full">
+  <img title='sometimes, mildly, other sensitive stuff' alt='sometimes, mildly, other sensitive stuff' class='object-cover' src="{{'/'|url}}imgs/cw_6.png">
+    <div class="info">
+	<ul>
+	<li>other things might be mildly referenced</li>
+	<li>check out the rest of the page for...</li>
+	<li>chapter-specific CWs</li>
+	<li>community-ran DTDD trigger list</li>
+	<li>things that WON'T be present</li>	
+	</ul>
+    </div>
+  </div> 
+
+  
+  </div>
+
+
+<style>
+
+.card {
+  aspect-ratio: 6/7;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.8s ease-out;
+
+}
+.card:hover , .card:focus, .card:active{
+}
+.card:hover:before, .card:focus:before, .card:active:before {
+  opacity: 1;
+}
+.card:hover .info, .card:focus .info, .card:active .info{
+  opacity: 1;
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2;
+  transition: 1s;
+  opacity: 0;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.card .info {
+  position: relative;
+  z-index: 3;
+  color: white;
+  opacity: 0;
+  transition: 1s;
+  padding: 0.5em;
+}
+.card .info h1 {
+  margin: 0px;
+}
+.card .info p {
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+</style>
+
+OTHER STUFF:
+<ul><li>skippable fourth wall break on the website</li></ul>
+
+<button id='ch_cw' onclick='showBox("ch_cw");' tabindex='1' class='my-2 button-none text-left w-full text-light-force bg-dark-force p-2 text-[1.1em] border-black hover:bg-dark-force/90 border-4'>click here for CHAPTER-SPECIFIC CONTENT WARNINGS (might contain mild spoilers)</button>
+
+<div id='ch_cw_box' class='border-dashed border-y-2 border-dark w-full hidden py-4'>
+<b>ISSUE #0:</b> none <br>
+<b>ISSUE #1:</b> magical fire | death threats | single clumsy mention of deadly diseases
+</div>
+
+<div>if you would benefit from more detailed information on other content that might be present in the story, we recommend you check the <a tabindex='1' href='https://www.doesthedogdie.com/media/1605829'>community-run <b>DTDD</b> page</a>! (the author also contributes to give more specific information when needed) <a tabindex='1' href='https://www.doesthedogdie.com/media/1605829'><img alt='does the dog die' class='inline-block hover:scale-111 ease-in-out duration-500 w-20 h-20 rotate-8' src='{{'/'|url}}imgs/sm_dtdd.png'></a>
+
+ </div>
+
+
+<small>if you have a specific trigger that's not listed anywhere but that's important for you to consider, feel free to <a href='{{"/"|locale_url}}contact' tabindex='1'>reach out to LoNK team to ask!</a> 💛 there's no shame in that.</small>
+
+
+<h1 class='font-cmu'>
+LOSERS OF NEAR-KYIV <b class='text-[#30A6D9]'>WILL NOT AT ANY POINT CONTAIN…</b></h1>
+
+<ul>
+<li>❌ <b>life-threatening illness</b> as major part of the plot</li>
+<li>❌ heavy/graphic on-screen <b>physical violence</b></li>
+<li>❌ <b>gore beyond very mild blood/injuries or old healed scars</b></li>
+<li>❌ <b>explicit sexual content</b></li>
+<li>❌ <b>slurs</b> usage</li>
+<li>❌ <b>2022 full-scale invasion of ukraine</b></li>
+</ul>
+
+<br>
+
+
+`;
+
+
+if(window.location.pathname=='{{"/" | locale_url}}read'){
+
+
+if (localStorage.getItem("hideCW")=="true"){
+cw_screen.innerHTML="";
+cw_screen.style.display='none';
+
+normal.style.display='revert';
+document.body.style.backgroundColor='revert';
+
+}else{
+
+normal.style.display='none';
+cw_screen.style.display='block';
+document.body.style.backgroundColor='black';
+cw_screen.innerHTML=cw_screen_content+`<div class='flex gap-4 flex-row w-full'>
+<button onclick='localStorage.setItem("hideCW", "true") ; location.reload(); ' tabindex='1' class='button text-center w-full'>YEAH, SOUNDS OKAY TO READ</button>
+<a href='{{"/"|locale_url}}' class='button text-center w-full' tabindex='1'>NO, MAYBE SOME OTHER TIME</a>
+</div>
+
+</div>`;
+}
+
+}
+
+
+
+
+function showBox(y) {
+  document.getElementById(y+'_box').classList.toggle('hidden');
+}
+
+
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+ const d = new Date();
+ let year = d.getFullYear(); 
+
+
+    document.getElementById('year').innerHTML=year;
+	
+if (document.title==='Losers of Near-Kyiv'){
+
+document.title='osers of Near-Kyiv';
+}
+
+
+
+function setCookie(name, value) {
+    localStorage.setItem(name, value);  // set. also its not fr a cookie lol its localstorage
+}
+
+function getCookie(name) {
+    return localStorage.getItem(name);  // get value
+}
+
+
+if(getCookie('theme')){
+setTheme(getCookie('theme'));
+}
+
+if(getCookie('primary-theme')){
+setThemePrimary(getCookie('primary-theme'));
+}else{
+
+if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        //OS theme setting detected as dark
+		setThemePrimary("dark");
+		setTheme("default_dark");
+}
+
+
+}
+
+
+});
+
+
+	
+function setData(x,y){
+ localStorage.setItem(x, y);
+}
+
+function getData(x){
+localStorage.getItem(x); 
+}
+
+
+
+// REPLACES ALL NAME INSTANCES ACROSS THE SITE WITH YOUR CHOSEN USERNAME
+let checkname=localStorage.getItem('username');
+
+if (!checkname){
+checkname='USERNAME';
+}
+
+const namesArray = document.querySelectorAll(".username"); 
+for (let i = 0; i < namesArray.length; i++) {
+namesArray[i].innerHTML= checkname;
+}
+
+
+
+const cwArray = document.querySelectorAll(".cw_og"); 
+for (let i = 0; i < cwArray.length; i++) {
+cwArray[i].innerHTML=cw_screen_content;
+}
+
+
+
+// SAME AS ABOVE BUT FOR PFPS
+
+let checkpfp=localStorage.getItem('pfp');
+
+if (!checkpfp){
+checkpfp="{{ '/' | url }}imgs/pfps/pfp.jpg";
+}
+
+
+const pfpArray = document.querySelectorAll(".pfp"); 
+for (let i = 0; i < pfpArray.length; i++) {
+pfpArray[i].src=checkpfp;
+}
+
+
+
+
+function loadSpoil(){
+
+const help_link=document.getElementById('help_link');
+const help_link_m=document.getElementById('help_link_m');
+
+const community_link=document.getElementById('community_link');
+const community_link_m=document.getElementById('community_link_m');
+
+const s_screen=document.getElementById('spoiler_screen');
+
+
+const s_state=localStorage.getItem('spoiler_state');
+
+
+if (s_state==null){
+// localStorage.setItem('spoiler_state', 'true');
+}else{
+
+
+const sdate = new Date();
+
+let dday = sdate.getDate();
+let mmonth = sdate.getMonth() + 1;
+let yyear = sdate.getFullYear();
+
+// This arrangement can be altered based on how we want the date's format to appear.
+let newwDate = `${dday}.${mmonth}.${yyear}`;
+
+if (localStorage.getItem('join_date')==null){
+ localStorage.setItem('join_date', newwDate);
+}
+
+const jdateArray = document.querySelectorAll(".join_date"); 
+for (let i = 0; i < jdateArray.length; i++) {
+jdateArray[i].innerHTML+=localStorage.getItem('join_date');
+}
+
+
+}
+
+if (s_state==='true'){
+help_link.innerHTML= `<p>???</p>`;
+community_link.innerHTML = `<p>???</p>`;
+
+
+if (s_screen){
+s_screen.classList.add('hidden');
+normal.classList.remove('hidden');
+
+}
+
+}else if (s_state==='false'){
+
+
+if (s_screen){
+s_screen.classList.add('hidden');
+normal.classList.remove('hidden');
+
+}
+
+help_link.innerHTML= `<a href="{{ '/' | locale_url }}help_us">❣️HELP US!</a>`;
+community_link.innerHTML= `<a href="{{ '/' | locale_url }}community">🌻community</a>`
+}
+
+
+}
+
+// ON LOAD
+
+document.addEventListener("DOMContentLoaded", (event) => {
+localStorage.setItem('lang', 'en-US');
+
+loadSpoil();
+
+
+});
+
+
+</script>
+
+<script>
+// INTRO 1 : TRUTH LIE ACHIEVEMENT SCRIPT 
+
+if (localStorage.getItem('ach_intro_lie') == 'true' && localStorage.getItem('ach_intro_truth') == 'true' && localStorage.getItem('ach_intro_truthlie') !== 'true'){
+showNewAchievement('ach_intro_truthlie');
+}
+
+// INTRO 1 : ALL OPTIONS ACHIEVEMENT SCRIPT 
+
+if (localStorage.getItem('ach_intro_exh') !== 'true'){
+var intervalID = window.setInterval(myCallback, 5000);
+
+function myCallback() {
+if (localStorage.getItem('rules_dialogue') == 'true' && localStorage.getItem('name_dialogue') == 'true' && localStorage.getItem('art_dialogue') == 'true' && localStorage.getItem('door_dialogue') == 'true' && localStorage.getItem('hobbies_dialogue') == 'true' && localStorage.getItem('leg_dialogue') == 'true'){
+showNewAchievement('ach_intro_exh');
+}
+
+}
+}
+
+const new_ach=document.getElementById('new_ach');
+$("#new_ach").hide;
+
+
+
+
+function showNewAchievement(aaa){
+
+let temporaryy = (aaa.toString());
+
+if (localStorage.getItem(temporaryy)!=='true'){
+
+localStorage.setItem(temporaryy, true);
+var ach_sound = document.getElementById("ach_sound"); 
+  ach_sound.volume=0.15;
+  ach_sound.play(); 
+
+
+var x = achbase.find(item => item.id === aaa.toString());
+
+document.getElementById('new_ach_title').innerHTML=x.title+': ';
+document.getElementById('new_ach_desc').innerHTML=" " + x.desc;
+document.getElementById('new_ach_img').src='{{"/" | url}}imgs/achievements/'+x.id+'.png';
+$("#new_ach").fadeIn(1000);
+
+setTimeout(() => {
+ $("#new_ach").fadeOut(3000);
+
+
+}, 8000);
+
+
+}
+
+}
+
+
+</script>
+</div>
+</body>

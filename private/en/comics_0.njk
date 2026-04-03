@@ -1,0 +1,77 @@
+---
+ 
+title: Losers of Near-Kyiv
+permalink: 'en/comics/comics_0/1.html'
+---
+
+<div class='w-full bg-darkpaper bg-size-[300px] flex-center flex-col'>
+<h1 class='text-outline text-white font-black text-[4em]'>ISSUE #0:</h1>
+
+<img src='{{ "/" | url }}imgs/comics_0/1.png' class='mb-4 w-full h-auto bg-cover md:w-3/5  lg:w-1/2'>
+
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 7ec2a80 (LoNK Update 18.03.2025)
+after all this time, LoNK finally became real.<br>
+of course, this comic is just created in order to take the first step in publishing it! <br>
+if you are curious about who dima REALLY is and about what REALLY happens to him...
+<br>
+<<<<<<< HEAD
+perhaps you're interested in <a class='lonkin' href='{{ "/" | locale_url }}comics/comics_1/1.html'>The Introduction Comic</a>. :]
+
+=======
+perhaps you're interested in <a class='lonkin' href='{{ "/" | locale_url }}comics/comics_1/1.html'>The Introduction Comic</a> :]
+>>>>>>> parent of 7ec2a80 (LoNK Update 18.03.2025)
+</p>
+
+<section class='flex-center gap-2 mb-4'>
+<a class='text-white button' href='{{ "/" | locale_url }}./read'>🏠</a>
+
+<div class='button'>
+<input type="checkbox" id="ReadCheck"> 
+<label class='text-white' for="ReadCheck">mark this issue as read</label>
+</div>
+
+
+
+</section>
+
+</div>
+
+<script>
+
+window.onload = function() {
+
+let y=localStorage.getItem('comics_0_read'); 
+
+if(y=='true'){
+document.getElementById("ReadCheck").checked = true;
+}else{
+document.getElementById("ReadCheck").checked = false;
+}
+}; // ^ ON PAGE LOAD, DECORATIVE
+
+const checkbox1 = document.getElementById('ReadCheck');
+
+checkbox1.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	setData('comics_0_read', true);
+	showNewAchievement('ach_og');
+  } else {
+	setData('comics_0_read', false);
+  }
+}) // ^ ON CHANGE OF "READ" CHECK, CHANGES STUFF
+
+
+
+
+
+</script>
+
+
+<!--comments -->
+<iframe class='focus-visible:outline-0 bg-light-force' src="https://komments.cloud/15c70a03e20eeb15d604e1" style="outline:none; width: 100%; height: 600px; border: none;">
+</iframe>

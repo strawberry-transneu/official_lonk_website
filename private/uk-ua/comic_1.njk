@@ -1,0 +1,466 @@
+---
+pagination:
+  data: comic
+  size: 1
+permalink: 'uk-ua/comics/comics_1/{{ pagination.pageNumber + 1}}.html'
+title: 'Losers of Near-Kyiv'
+layout: null
+---
+{% extends "template_ua.njk" %}
+
+{% block inside %}
+<div class='w-full'>
+
+
+<div class='w-full bg-black bg-size-[300px] flex-center flex-col'>
+
+
+{%if (pagination.pageNumber + 1)== 2 or (pagination.pageNumber + 1)== 83 %}
+
+<div class='w-full p-2 text-white hidden' id='demo2box'>( тобі потрібно було зайняти <span id='demo2'></span> що б прочитати "ознайомлення" ! )
+<button class='button-none bg-black hover:bg-zinc-900 text-white border-2 px-2' onclick='localStorage.setItem("start_time", ""); localStorage.setItem("finish_time", ""); localStorage.setItem("start_date", ""); localStorage.setItem("finish_date", ""); location.reload();'>клацніть щоб скинути таймер.</button>
+
+</div>
+
+<script>
+
+var date_when_started;
+var date_when_finished;
+
+//THE READING LENGTH SCRIPT
+
+function start_date(){
+
+if(!localStorage.getItem("start_date")){
+
+date_when_started = Date.now();
+console.log(date_when_started);
+localStorage.setItem('start_date', date_when_started);
+}
+
+}
+
+
+
+function finish_date(){
+
+var temp = localStorage.getItem("start_date"); 
+console.log(temp);
+date_when_started = temp;
+
+if(!localStorage.getItem("finish_date")){
+
+date_when_finished = Date.now();
+
+}else{
+
+date_when_finished = localStorage.getItem("finish_date");
+
+}
+
+console.log(date_when_started + ' <- date when started, date when finished-> ' + date_when_finished);
+
+console.log('counting minutes...');
+
+let diffTime = Math.abs(date_when_finished - date_when_started);
+let otherTime = convert(diffTime);
+
+if (localStorage.getItem('start_date')){
+document.getElementById("demo2").innerHTML = otherTime;
+document.getElementById("demo2box").style.display = 'block';
+localStorage.setItem("finish_date", date_when_finished);
+
+}else{
+document.getElementById("demo2").innerHTML = "???";
+document.getElementById("demo2box").style.display = 'block';
+}
+
+
+}
+
+
+
+
+function convert(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);  
+  return (seconds == 60 ? (minutes+1) + ":00" : minutes + " хв. і " + (seconds < 10 ? "0" : "") + seconds +" с. "); 
+}
+
+
+
+
+{%if (pagination.pageNumber + 1)== 2 %}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+console.log('started date');
+start_date();
+console.log('STARTED');
+});
+
+{% else %}
+
+
+document.addEventListener("DOMContentLoaded", (event) => {
+console.log('finished date');
+finish_date();
+});
+
+
+{% endif %}
+</script>
+
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 1 %}
+
+
+<h1 style='font-family: "punk_01", "Arial", sans-serif!important' class='text-outline text-white font-black text-center break-all text-[4em]'>O3HA<span class=' inline-block -scale-x-100'>Ñ</span>OM<span class=' inline-block -scale-100'>V</span>EHH<span class=' inline-block -scale-x-100'>R</span>:</h1>
+
+
+
+<div class='text-white bg-black flex-center flex-col'>
+<small class='text-orange-200 text-center'>
+ПЕРШИЙ РАЗ? раджу прочитати це разом з друзями або записати свою реакцію!</small>
+
+<h2 class='mt-2'>ПОПЕРЕДЖЕННЯ ДО ЦЬОГО РОЗДІЛУ:</h2>
+<p class='text-center my-2 md:my-0'>магічне полум'я | погрози вбивству | одна незграбна згадка смертельних захворювань</p>
+<p class='mb-[40vh] text-center'><a href='{{"/"|locale_url}}/content_warnings'>перевірьте ВСІ попередження до коміксу</a></p>
+</div>
+
+
+{%endif%}
+
+
+<!-- 
+
+<div class='text-white bg-black flex-center flex-col'>
+<h2>CONTENT WARNINGS SPECIFIC TO THIS CHAPTER ONLY:</h2>
+<p>fire | death threats | single clumsy mention of deadly diseases </p>
+</div>
+
+
+-->
+
+
+<!-- if its a normal page like page 30 then everything is fine lol . i could make page 31 a lost page hehe -->
+{%if (pagination.pageNumber + 1)!== 30 %}
+
+{%if (pagination.pageNumber + 1)== 83 %}
+
+{% include 'ch_1_credits_ua.njk' %}
+
+{% else %}
+
+<img src='../../../imgs/comics_1_ua/{{(pagination.pageNumber + 1) }}.png' class='py-4 mb-4 w-full h-auto bg-cover md:w-3/5 lg:w-1/2'>
+
+{%endif%}
+
+
+{%else%}
+
+<!--fucking game in here ig-->
+
+
+{% include 'game_ua.njk' %}
+
+<!-- :3 -->
+
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 3 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: <a href='https://uk.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%81%D1%82%D0%B0%D0%BD%D1%86%D1%96%D0%B9_%D0%9A%D0%B8%D1%97%D0%B2%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%96%D1%82%D0%B5%D0%BD%D1%83'>це СПРАЖНІ станції метро у Києві!</a><br>
+</p>
+{% endif %}
+
+{%if (pagination.pageNumber + 1)== 4 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: <a href='https://uk.wikipedia.org/wiki/%D0%9C%D0%B0%D0%B9%D0%B4%D0%B0%D0%BD_%D0%9D%D0%B5%D0%B7%D0%B0%D0%BB%D0%B5%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%96_(%D1%81%D1%82%D0%B0%D0%BD%D1%86%D1%96%D1%8F_%D0%BC%D0%B5%D1%82%D1%80%D0%BE)'>все ще справжні</a> <a href='https://uk.wikipedia.org/wiki/%D0%A5%D1%80%D0%B5%D1%89%D0%B0%D1%82%D0%B8%D0%BA_(%D1%81%D1%82%D0%B0%D0%BD%D1%86%D1%96%D1%8F_%D0%BC%D0%B5%D1%82%D1%80%D0%BE)'>станції метро.</a><br>
+</p>
+{% endif %}
+
+
+
+
+{%if (pagination.pageNumber + 1)== 29 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: <a href='../../../imgs/comics_1_ua/note_1.png'>"англійський мем".</a>
+</p>
+{% endif %}
+
+
+
+{%if (pagination.pageNumber + 1)== 31 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: якщо треба, прошу, загугліть "Джерард Вей My Chemical Romance".
+</p>
+{% endif %}
+
+
+
+{%if (pagination.pageNumber + 1)== 33 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: акрил говорить про "gay earring rule": західну, здебільшого американську культурну ідею що чоловіки-геї носять сергі справа (а не-геї зліва).
+</p>
+{% endif %}
+
+
+
+
+{%if (pagination.pageNumber + 1)== 54 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+це <a href='https://www.edimdoma.ru/retsepty/48979-keks-v-kruzhke'><b>справжній рецепт </b></a> який я роблю лол (попередження: сайт російськомовний)!
+</p>
+{% endif %}
+
+
+{%if (pagination.pageNumber + 1)== 68 %}
+<h2 class='text-light-force bg-black/80 px-2'>примітка автора:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+КУЛЬТУРНЕ ЗАУВАЖЕННЯ: <a href='https://uk.wikipedia.org/wiki/%D0%84%D0%B2%D1%80%D0%BE%D0%BC%D0%B0%D0%B9%D0%B4%D0%B0%D0%BD'>євромайдан</a>
+</p>
+{% endif %}
+
+
+
+<section class='flex-center flex-wrap gap-2 mb-4'>
+
+
+{%if (pagination.pageNumber + 1)!== 1 %}
+<a class='text-white button md:order-none -order-2' href='{{ pagination.pageNumber }}'>↩️ назад</a>
+{%endif%}
+
+
+
+<a class='text-white button' href='{{ "/"|locale_url}}/read'>🏠</a>
+
+<button class='text-white' onClick='savePage(); alert("СТОРІНКУ ЗБЕРЕЖЕНО!");'>💾зберегти сторінку</button>
+
+<div class='button'>
+<input type="checkbox" id="autosaveCheck"> 
+<label class='text-white' for="autosaveCheck">⭐автозбереження <span></span></label>
+</div>
+
+
+<button class='text-white' onClick='loadPage();'>📥завантажити сторінку</button>
+
+
+
+
+{%if ((pagination.pageNumber + 1)!== 83) and ((pagination.pageNumber + 1)!== 30) %}
+<a class='text-white button md:order-none -order-1' href='{{ pagination.pageNumber +2}}'>вперед ➡️</a>
+{%endif%}
+
+
+</section>
+
+
+</div>
+
+
+
+{%if (pagination.pageNumber + 1)== 1 %}
+
+<!--
+<p>Description: here comes description, description, description, description.</p>
+-->
+
+<iframe class='focus-visible:outline-0 bg-light-force' src="https://komments.cloud/549efc034d51bc2f59a2c4" style="outline:none; width: 100%; height: 600px; border: none;">
+</iframe>
+
+{%elif (pagination.pageNumber + 1)== 83 %}
+
+<iframe class='focus-visible:outline-0 bg-light-force' src="https://komments.cloud/421c3a636a20fdea9c27ff" style="outline:none; width: 100%; height: 600px; border: none;">
+</iframe>
+
+
+{%endif%}
+
+<script>
+
+function checkVisible(elm) {
+  var rect = elm.getBoundingClientRect();
+  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+  return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
+
+var comic;
+
+window.onload = function() {
+
+
+
+const searchparams = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+let params = searchparams.do; // "some_value"
+
+
+if (params=='load'){
+console.log('LOADING...');
+loadPage();
+}
+
+
+{%if (pagination.pageNumber + 1)== 83 %}
+let isRead=localStorage.getItem('comics_1_read');
+
+if(isRead=='true'){
+document.getElementById("ReadCheck").checked = true;
+
+}else{
+document.getElementById("ReadCheck").checked = false;
+
+}
+
+{%endif%}
+
+
+let zz=localStorage.getItem('autosaveOn'); 
+
+if(zz=='true'){
+
+if (getData('comics_1_page')!==1){
+savePage();
+console.log()
+}
+document.getElementById("autosaveCheck").checked = true;
+
+}else{
+document.getElementById("autosaveCheck").checked = false;
+}
+
+
+}; // ^ ON PAGE LOAD, DECORATIVE
+
+
+{%if (pagination.pageNumber + 1)== 83 %}
+
+const checkbox1 = document.getElementById('ReadCheck');
+
+checkbox1.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	showNewAchievement('ach_intro');
+	setData('comics_1_read', true);
+	setData('spoiler_state', false);
+  } else {
+	setData('comics_1_read', false);
+  }
+}) // ^ ON CHANGE OF "READ" CHECK, CHANGES STUFF
+
+{%endif%}
+
+
+const checkbox2 = document.getElementById('autosaveCheck');
+
+checkbox2.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	setData('autosaveOn', true);
+	savePage();
+  } else {
+	setData('autosaveOn', false);
+  }
+}) // ^ ON CHANGE OF "autosave" CHECK, CHANGES STUFF
+
+
+
+/*The above is for the "read" i think ^ the below is for save and load*/
+
+function savePage(){
+
+{%if (pagination.pageNumber + 1)!== 1 %}
+
+localStorage.setItem('comics_1_page', {{pagination.pageNumber + 1}});
+
+{% endif %}
+
+
+}
+
+function loadPage(){
+
+if (localStorage.getItem('comics_1_page')){
+let yyy = localStorage.getItem('comics_1_page');
+window.location.href = './'+localStorage.getItem('comics_1_page');
+}else{
+alert('Збереження не знайдено! О ні!');
+}
+}
+
+
+{%if (pagination.pageNumber + 1)== 1 %}
+document.title="БОЖЕ, | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 13 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 44 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 45 %}
+document.title="ЗАРАЗ ЗАРАЗ ЗАРАЗ ЗАРАЗ ЗАРАЗ ЗАРАЗ | Losers of Near-Kyiv";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 61 %}
+document.title="...";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 62 %}
+document.title="БОЖЕ, | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 63 %}
+document.title="...";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 64 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 30 %}
+document.title="поговоримо? | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 82 %}
+document.title="..................................";
+{%endif%}
+
+</script>
+
+
+<script>
+function showBox(y) {
+console.log('yay');
+  document.getElementById(y+'_box').classList.toggle('hidden');
+}
+</script>
+
+
+</div>
+
+
+
+{% endblock %}

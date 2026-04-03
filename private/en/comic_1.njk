@@ -1,0 +1,473 @@
+---
+pagination:
+  data: comic
+  size: 1
+permalink: 'en/comics/comics_1/{{ pagination.pageNumber + 1}}.html'
+title: 'Losers of Near-Kyiv'
+layout: null
+---
+{% extends "template.njk" %}
+
+{% block inside %}
+<body>
+
+
+<div class='w-full bg-black bg-size-[300px] flex-center flex-col'>
+
+
+{%if (pagination.pageNumber + 1)== 2 or (pagination.pageNumber + 1)== 83 %}
+
+<div class='w-full p-2 text-white hidden' id='demo2box'>( it took you <span id='demo2'></span> to read LoNK:In' ! )
+<button class='button-none bg-black hover:bg-zinc-900 text-white border-2 px-2' onclick='localStorage.setItem("start_time", ""); localStorage.setItem("finish_time", ""); localStorage.setItem("start_date", ""); localStorage.setItem("finish_date", ""); location.reload();'>click here to reset the timer.</button>
+
+</div>
+
+<script>
+
+var date_when_started;
+var date_when_finished;
+
+//THE READING LENGTH SCRIPT
+
+function start_date(){
+
+if(!localStorage.getItem("start_date")){
+
+date_when_started = Date.now();
+console.log(date_when_started);
+localStorage.setItem('start_date', date_when_started);
+}
+
+}
+
+
+
+function finish_date(){
+
+var temp = localStorage.getItem("start_date"); 
+console.log(temp);
+date_when_started = temp;
+
+if(!localStorage.getItem("finish_date")){
+
+date_when_finished = Date.now();
+
+}else{
+
+date_when_finished = localStorage.getItem("finish_date");
+
+}
+
+console.log(date_when_started + ' <- date when started, date when finished-> ' + date_when_finished);
+
+console.log('counting minutes...');
+
+let diffTime = Math.abs(date_when_finished - date_when_started);
+let otherTime = convert(diffTime);
+
+if (localStorage.getItem('start_date')){
+document.getElementById("demo2").innerHTML = otherTime;
+document.getElementById("demo2box").style.display = 'block';
+localStorage.setItem("finish_date", date_when_finished);
+
+}else{
+document.getElementById("demo2").innerHTML = "???";
+document.getElementById("demo2box").style.display = 'block';
+}
+
+
+}
+
+
+
+
+function convert(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);  
+  return (seconds == 60 ? (minutes+1) + ":00" : minutes + " minutes and " + (seconds < 10 ? "0" : "") + seconds +" seconds "); 
+}
+
+
+
+
+{%if (pagination.pageNumber + 1)== 2 %}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+console.log('started date');
+start_date();
+console.log('STARTED');
+});
+
+{% else %}
+
+
+document.addEventListener("DOMContentLoaded", (event) => {
+console.log('finished date');
+finish_date();
+});
+
+
+{% endif %}
+</script>
+
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 1 %}
+<h1 class='text-outline text-white font-black text-center text-[4em]'>THE INTRODUCTION:</h1>
+
+<div class='text-white bg-black flex-center flex-col'>
+<small class='text-orange-200 text-center'>FIRST TIME? consider reading this together with a friend, make a live thread, or record your reaction!</small>
+
+<h2 class='mt-2'>CHAPTER SPECIFIC CONTENT WARNINGS:</h2>
+<p class='text-center my-2 md:my-0'>magical fire | death threats | single clumsy mention of deadly diseases</p>
+<p class='mb-[40vh] text-center'><a href='{{"/"|url}} en/content_warnings'>check ALL warnings for the story</a></p>
+</div>
+
+
+{%endif%}
+
+
+<!-- 
+
+<div class='text-white bg-black flex-center flex-col'>
+<h2>CONTENT WARNINGS SPECIFIC TO THIS CHAPTER ONLY:</h2>
+<p>fire | death threats | single clumsy mention of deadly diseases </p>
+</div>
+
+
+-->
+
+
+<!-- if its a normal page like page 30 then everything is fine lol . i could make page 31 a lost page hehe -->
+{%if (pagination.pageNumber + 1)!== 30 %}
+
+{%if (pagination.pageNumber + 1)== 83 %}
+
+{% include 'ch_1_credits.njk' %}
+
+{% else %}
+
+<img src='../../../imgs/comics_1/{{(pagination.pageNumber + 1) }}.png' class='py-4 mb-4 w-full h-auto bg-cover md:w-3/5 lg:w-1/2'>
+
+{%endif%}
+
+
+{%else%}
+
+<!--fucking game in here ig-->
+
+
+{% include 'game.njk' %}
+
+<!-- :3 -->
+
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 3 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: <a href='https://en.wikipedia.org/wiki/List_of_Kyiv_Metro_stations'>these are REAL kyiv metro stations!</a><br>
+also, his proper name is <b>Dmytro</b>: Dima is a shortened, informal version.<br>
+it's one of the most generic ukrainian male names. my friend says it's comparable to being called Kyle in the US.<br>
+</p>
+{% endif %}
+
+{%if (pagination.pageNumber + 1)== 4 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: <a href='https://en.wikipedia.org/wiki/Maidan_Nezalezhnosti_(Kyiv_Metro)'>still real kyiv</a> <a href='https://en.wikipedia.org/wiki/Khreshchatyk_(Kyiv_Metro)'>metro stations.</a><br>
+</p>
+{% endif %}
+
+
+{%if (pagination.pageNumber + 1)== 19 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: <a href='https://en.wikipedia.org/wiki/Culturology'>culturology</a> is similar in concept, but is not really the same as picking western cultural studies!
+</p>
+{% endif %}
+
+
+{%if (pagination.pageNumber + 1)== 31 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: if needed, please google "Gerard Way My Chemical Romance".
+</p>
+{% endif %}
+
+
+
+{%if (pagination.pageNumber + 1)== 33 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+<a href='https://www.urbandictionary.com/define.php?term=Right+Earring+Rule'>"gay earring rule"</a>
+</p>
+{% endif %}
+
+
+
+{%if (pagination.pageNumber + 1)== 54 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+that's a simplified version of a <b>real mug muffin recipe i made lol</b>
+</p>
+{% endif %}
+
+{%if (pagination.pageNumber + 1)== 50 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: saying you like anime out of all things is like, REALLY, really, the gayest act one can do in a situation like this.
+<br>if in many western countries like France or UK manga is something you can buy in a regular bookstore, in ukraine its much largely a niche underground thing, mostly liked by total nerds or queers... and very often by total nerd queers.<br>
+not good for dima!<br>
+(one of beta readers said it's comparable to liking musical theatre in the west, if it helps.)
+</p>
+{% endif %}
+
+
+{%if (pagination.pageNumber + 1)== 68 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: just in 2013 there was an <a href='https://en.wikipedia.org/wiki/Euromaidan'>anti-government revolution.</a> a SIGNIFICANT amount of protesters in it were students. put two and two together, won't you?
+</p>
+{% endif %}
+
+{%if (pagination.pageNumber + 1)== 79 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: "untraditional" is one way you can imply subtly and gently imply "homosexual" in ukrainian slang, used most by older generations.
+</p>
+{% endif %}
+
+
+<section class='flex-center flex-wrap gap-2 mb-4'>
+
+
+{%if (pagination.pageNumber + 1)!== 1 %}
+<a class='text-white button' href='{{ pagination.pageNumber }}'>↩️ previous</a>
+{%endif%}
+
+<a class='text-white button' href='{{ "/"|url}}en/read'>🏠</a>
+
+<button class='text-white' onClick='savePage(); alert("PAGE SAVED!");'>💾save</button>
+
+<div class='button'>
+<input type="checkbox" id="autosaveCheck"> 
+<label class='text-white' for="autosaveCheck">⭐autosave <span></span></label>
+</div>
+
+
+<button class='text-white' onClick='loadPage();'>📥load</button>
+
+
+
+
+{%if ((pagination.pageNumber + 1)!== 83) %}
+<a class='text-white button' href='{{ pagination.pageNumber +2}}'>next ➡️</a>
+{%endif%}
+
+
+</section>
+
+
+</div>
+
+
+
+{%if (pagination.pageNumber + 1)== 1 %}
+
+<!--
+<p>Description: here comes description, description, description, description.</p>
+-->
+
+<iframe class='focus-visible:outline-0 bg-light-force' src="https://komments.cloud/549efc034d51bc2f59a2c4" style="outline:none; width: 100%; height: 600px; border: none;">
+</iframe>
+
+{%elif (pagination.pageNumber + 1)== 83 %}
+
+<iframe class='focus-visible:outline-0 bg-light-force' src="https://komments.cloud/421c3a636a20fdea9c27ff" style="outline:none; width: 100%; height: 600px; border: none;">
+</iframe>
+
+
+{%endif%}
+
+<script>
+
+function checkVisible(elm) {
+  var rect = elm.getBoundingClientRect();
+  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+  return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
+
+var comic;
+
+window.onload = function() {
+
+
+
+const searchparams = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+let params = searchparams.do; // "some_value"
+
+
+if (params=='load'){
+console.log('LOADING...');
+loadPage();
+}
+
+
+{%if (pagination.pageNumber + 1)== 83 %}
+let isRead=localStorage.getItem('comics_1_read');
+
+if(isRead=='true'){
+document.getElementById("ReadCheck").checked = true;
+
+}else{
+document.getElementById("ReadCheck").checked = false;
+
+}
+
+{%endif%}
+
+
+let zz=localStorage.getItem('autosaveOn'); 
+
+if(zz=='true'){
+
+if (getData('comics_1_page')!==1){
+savePage();
+console.log()
+}
+document.getElementById("autosaveCheck").checked = true;
+
+}else{
+document.getElementById("autosaveCheck").checked = false;
+}
+
+
+}; // ^ ON PAGE LOAD, DECORATIVE
+
+
+{%if (pagination.pageNumber + 1)== 83 %}
+
+const checkbox1 = document.getElementById('ReadCheck');
+
+checkbox1.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	showNewAchievement('ach_intro');
+	setData('comics_1_read', true);
+	setData('spoiler_state', false);
+  } else {
+	setData('comics_1_read', false);
+  }
+}) // ^ ON CHANGE OF "READ" CHECK, CHANGES STUFF
+
+{%endif%}
+
+
+const checkbox2 = document.getElementById('autosaveCheck');
+
+checkbox2.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	setData('autosaveOn', true);
+	savePage();
+  } else {
+	setData('autosaveOn', false);
+  }
+}) // ^ ON CHANGE OF "autosave" CHECK, CHANGES STUFF
+
+
+
+/*The above is for the "read" i think ^ the below is for save and load*/
+
+function savePage(){
+
+{%if (pagination.pageNumber + 1)!== 1 %}
+
+localStorage.setItem('comics_1_page', {{pagination.pageNumber + 1}});
+
+{% endif %}
+
+
+}
+
+function loadPage(){
+
+if (localStorage.getItem('comics_1_page')){
+let yyy = localStorage.getItem('comics_1_page');
+window.location.href = './'+localStorage.getItem('comics_1_page');
+}else{
+alert('No Save Found! Uh Oh!');
+}
+}
+
+
+{%if (pagination.pageNumber + 1)== 1 %}
+document.title="DEAR GOD, | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 13 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 44 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 45 %}
+document.title="NOW NOW NOW NOW NOW NOW NOW | Losers of Near-Kyiv";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 61 %}
+document.title="...";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 62 %}
+document.title="DEAR GOD, | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 63 %}
+document.title="...";
+{%endif%}
+
+
+{%if (pagination.pageNumber + 1)== 64 %}
+document.title="...";
+{%endif%}
+
+{%if (pagination.pageNumber + 1)== 30 %}
+document.title="wanna chat? | Losers of Near-Kyiv";
+{%endif%}
+
+
+
+{%if (pagination.pageNumber + 1)== 82 %}
+document.title="..................................";
+{%endif%}
+
+</script>
+
+
+<script>
+function showBox(y) {
+console.log('yay');
+  document.getElementById(y+'_box').classList.toggle('hidden');
+}
+</script>
+
+
+</body>
+
+
+
+{% endblock %}

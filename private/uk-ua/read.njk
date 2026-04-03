@@ -1,0 +1,166 @@
+---
+ 
+title: ЧИТАТИ | Лохи з-під Києва
+---
+<h1 class='p-2'>Читати Лохів з-під Києва
+</h1>
+
+
+<div class='bg-light w-full flex flex-col md:grid grid-cols-[70%_30%]'>
+<div class='flex flex-col-reverse md:flex-col bg-dark-force text-white p-2'>
+<h2 class='p-2'>РОЗДІЛИ:</h2>
+<ul class='*:odd:bg-black/20 *:py-1 *:hover:bg-highlight/50'>
+<li onclick='mouseOver("comics_0_ua")' onmouseover='mouseOver("comics_0_ua")' id='comics_0'><a href='./comics/comics_0/1' class='font-bold lonkin'>ВИПУСК #0-ий</a> | 11 жовтня, 2025 </li>
+<li onclick='mouseOver("comics_1_ua")' onmouseover='mouseOver("comics_1_ua")' id='comics_1'><a href='./comics/comics_1/1' class='font-bold lonkin'>ВИПУСК #1-ий | Ознайомлення</a> | 18 жовтня, 2025 (публічно: 20 грудня, 2025) </li>
+<li onclick='mouseOver()' onmouseover='mouseOver()' id=''><b class='lonk'>ВИПУСК #2:</b> | ?? ??????, 2026 </li>
+<li onclick='mouseOver()' onmouseover='mouseOver()' id=''><b class='lonk'>???:</b> ??? | ??? </li>
+</ul>
+
+<div class='bg-black -skew-x-4 text-white flex-grow w-full p-4 justify-center gap-2 items-center flex'>
+<span class='text-red-400 font-bold font-block text-[1.2em]'>Лохи:</span> 
+
+<span id='random_tip'><!--tip here--></span>
+
+</div>
+
+
+</div>
+<div id='preview' class='bg-cover bg-dark-force h-70 md:h-full relative'>
+<div class='absolute top-0 right-0 h-full w-full bg-highlight/20'></div>
+
+<div id='pagePage' class='absolute hidden top-0 left-0 p-2 bg-black text-light-force'></div> <!-- page #3 -->
+
+<a id='read' class='button absolute hidden bottom-0 right-0 md:w-auto w-full'>читати ?</a>
+</div>
+
+</div>
+
+<script>
+
+
+function mouseOver(x) {
+  if (x){ // IF THERE IS A VALID COMIC CHOSEN
+  var x_page;
+  
+  let currentcomicPage = x+'_page';  
+  if (localStorage.getItem(currentcomicPage)){
+  x_page=localStorage.getItem(currentcomicPage);
+  console.log(x_page);
+  }else{
+  x_page=1;
+    console.log(x_page);
+  }
+  
+  
+  let preview_img = x_page;
+  
+  if ((x=='comics_1_ua') && ((x_page==1) || (x_page==83))){
+  preview_img = '2';
+  } //just tells that if its first chapter to not use the clickbaity as fuck thingie
+  
+  
+  document.getElementById("read").classList.remove('hidden');
+  document.getElementById("read").classList.add('block');
+  document.getElementById("read").innerHTML = 'читати?';
+  
+  if (x_page!==1){
+  document.getElementById("pagePage").innerHTML='currently on <b>page #'+x_page+'</b>';
+  document.getElementById("pagePage").classList.remove('hidden');  
+  document.getElementById("pagePage").classList.add('block'); 
+  
+  document.getElementById("read").innerHTML = 'продовжити?';
+  
+  }else{
+  document.getElementById("pagePage").classList.add('hidden'); 
+  document.getElementById("pagePage").classList.remove('block'); 
+  }
+  
+  document.getElementById("read").href='./comics/' + (x.slice(0, -3)) +'/'+ x_page +'.html';    
+  document.getElementById("preview").style.backgroundImage = "url('../../imgs/"+x+"/"+preview_img+".png')"; 
+
+  let currentcomicRead = x+'_read';
+  
+  if (localStorage.getItem(currentcomicRead)=='true'){
+  document.getElementById("pagePage").classList.add('block');  
+  document.getElementById("pagePage").classList.remove('hidden'); 
+  document.getElementById("pagePage").innerHTML='✔ прочитано';
+  document.getElementById("preview").style.backgroundImage = "url('../../imgs/"+x+"/"+preview_img+".png')"; 
+  document.getElementById("read").innerHTML = 'перечитати?';
+  }
+  
+  
+  
+  }else{
+  document.getElementById("read").classList.remove('block');
+  document.getElementById("read").classList.add('hidden');
+  document.getElementById("pagePage").classList.remove('block');  
+  document.getElementById("pagePage").classList.add('hidden'); 
+  
+  
+  document.getElementById("preview").style.backgroundImage = "url('../../imgs/other_404.png')"; 
+  
+  }
+
+}
+
+
+window.onload = function() {
+
+let y=localStorage.getItem('comics_0_read'); 
+let xy=localStorage.getItem('comics_1_read'); //checks if its read
+
+if(y=='true'){
+document.getElementById("comics_0").innerHTML = '&#x2705; ПРОЧИТАНО | ' + document.getElementById("comics_0").innerHTML;
+}
+
+if(xy=='true'){
+document.getElementById("comics_1").innerHTML = '&#x2705; ПРОЧИТАНО | ' + document.getElementById("comics_1").innerHTML;
+}
+
+
+
+
+
+//random tip script, move it to document on load rather than window
+const tip= document.getElementById('random_tip');
+
+
+const s_state=localStorage.getItem('spoiler_state');
+
+
+const tips = ["не стався упереджено", "цей комікс не про студ. життя", "НЕЙМОВІРНО!!! цей чоловік не може перестати страждати!!!", "ахуєть! геї!", "україна понад усе!", "Лохи з-під Києва", "<a href='./contact'>додайте сюди свій підзаголовок!</a>", "транс* права - права людини", "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>клацніть сюди для веселої, милої речі!</a>", "найкращий вебкомікс в інтернеті з 2025 року! <sup>неперевірене джерело</sup>",
+
+`<button class='underline decoration-2 button-none' onclick='showNewAchievement("ach_luckyread");
+'>🍀 бачу тобі подобається читати ці фрази. хочеш ⭐ досягнення?</button>`
+
+];
+
+
+if (s_state==='false'){
+let random_tip = Math.floor(Math.random() * tips.length);
+tip.innerHTML=tips[random_tip];
+}else{
+tip.innerHTML=`ПІДЗАГОЛОВОК З'ЯВИТСЯ ПІСЛЯ ЧИТАННЯ "ОЗНАЙМОЛЕННЯ"`;
+}
+
+
+
+
+
+}
+
+/*
+window.onload = function() {
+
+
+
+let xyz=localStorage.getItem('introduction'); // checks if theres a saved page for introduction comic
+if(xyz){
+document.getElementById("issue_1").innerHTML += '<br> currently on page #' + localStorage.getItem('introduction');
+document.getElementById("read").innerHTML = 'continue?';
+}
+
+
+};*/
+
+</script>

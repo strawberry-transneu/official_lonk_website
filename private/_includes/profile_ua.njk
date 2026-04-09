@@ -1,0 +1,43 @@
+
+
+
+<div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2'>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/pfp.jpg">
+<button onclick='pfpPick("pfp.jpg");'>ОБРАТИ?</button>
+</div>
+
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/acryl_1.png">
+<button onclick='pfpPick("acryl_1.png");'>ОБРАТИ?</button>
+</div>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/dima_1.png">
+<button onclick='pfpPick("dima_1.png");'>ОБРАТИ?</button>
+</div>
+
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/zaria_1.png">
+<button onclick='pfpPick("zaria_1.png");'>ОБРАТИ?</button>
+</div>
+
+<div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+<img class='w-full' src="{{ '/' | url }}imgs/pfps/misha_1.png">
+<button onclick='pfpPick("misha_1.png");'>ОБРАТИ?</button>
+</div>
+
+
+</div>
+
+<script>
+function pfpPick(x){
+const y = "{{ '/' | url }}imgs/pfps/"+x;
+console.log(y);
+localStorage.setItem("pfp", y);
+alert('нову світлину обрано! прошу, оновіть сторінку.');
+}
+</script>

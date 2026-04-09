@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html style='width:100%; height:100%' lang="{{lang}}" data-theme="white">
 
 <head>
@@ -74,21 +73,17 @@
 	--color-dark-force: #59423F;
 	--color-light: #EBE4DB;
 	--color-light-force: #EBE4DB;
+	
 	--color-highlight: oklch(89.2% 0.058 10.001);
-		
-		--color-white-adapt: white;
+	--color-white-adapt: white;
 	--color-black-adapt: black;
 
 	
 	--background-image-paper-force: url('{{ '/' | url }}./imgs/seamless.png');
 
 	--font-loverboy: "Loverboy", "Courier New", Courier, monospace; 
-
 	--font-mau: "Mau", "Courier New", Courier, monospace; 
-
 	--font-sans: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
-
-
 	--font-cmu: "CMU Typewriter Text Regular", "Courier New", Courier, monospace; 
 	--font-block: "block", "Courier New", Courier, monospace;
 	--font-spike: "spike", "Courier New", Courier, monospace;
@@ -349,6 +344,14 @@ background-position: 1000px;
 </style>
 
 
+<link rel="stylesheet" href="https://webcomicring.org/js/comicring.css">
+
+<style>
+#webcomicwebring{
+margin: 0px!important;  
+}
+</style>
+
 </head>
 
 
@@ -375,7 +378,7 @@ background-position: 1000px;
 
 
 <div class='relative  flex flex-col *:py-2 *:text-[1.1em] *:text-fortext *:bg-light gap-4'>
-<!--<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>-->
+<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>
 
 <a href="{{ '/' | locale_url }}">🏡home</a>
 
@@ -398,7 +401,7 @@ background-position: 1000px;
 <button class='p-0 bg-dark-force text-light-force bg-none border-0' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 DARK MODE</button>
 </div>
 
-<button aria-label='open user settings menu' onclick='togglePFPMenu();' class=' text-light-force flex justify-center items-center m-0 p-0 border-0 gap-2'>
+<button aria-label='open user settings menu' onclick='togglePFPMenu();' class='text-light-force! flex justify-center items-center m-0 p-0 border-0 gap-2'>
 <img id='pfp' alt='user options' class='w-12 h-12 gap-2 pfp'>
 <div>USER SETTINGS</div> 
 </button>
@@ -420,7 +423,7 @@ background-position: 1000px;
 
 <nav class='hidden lg:flex relative bg-cardboard bg-cover flex-grow flex-1 grid grid-cols-4 grid-rows-1 justify-end items-center flex-row self-stretch *:bg-light gap-4'>
 
-<!--<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>-->
+<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>
 
 
 <a href="{{ '/' | locale_url }}">🏡home</a>
@@ -465,7 +468,7 @@ background-position: 1000px;
 </nav>
 </header>
 
-<main class='flex m-4 justify-center items-center flex-col min-w-0 bg-light'>
+<main class='flex m-2 md:m-4 justify-center items-center flex-col min-w-0 bg-light'>
 
 
 {% block inside %}
@@ -473,7 +476,7 @@ background-position: 1000px;
 {% endblock %}
 </main>
 
-<footer class='bg-cardboard text-white flex-col bg-cover flex-center p-2'>
+<footer id='footer' class='bg-cardboard text-white flex-col bg-cover flex-center text-right p-5 text-[0.95em] md:p-2'>
 
 <div>
 
@@ -489,6 +492,7 @@ background-position: 1000px;
 <div>
 <a href='{{ "/" | locale_url }}sitecredits'>this website was made outta cardboard</a> <br> 👍 hosted with <a href='https://neocities.org'>neocities</a> support plan <br> 
 </div>
+
 </div>
 
 
@@ -497,7 +501,10 @@ background-position: 1000px;
 
 
 <div class='pb-2'>
-losers of near-kyiv 🄯 <span id='year'></span> | <a href="{{ '/' | locale_url}}contact">contact us ?</a>
+losers of near-kyiv 🄯 <span id='year'></span> | <a href="{{ '/' | locale_url}}contact">contact us ?</a> | 
+<a href='https://losersofnear-kyiv.neocities.org/'>
+<img class='inline-block' src='{{"/"|url}}imgs/button.gif'>
+</a>
 </div>
 
 <div class='hidden *:transition-colors *:duration-2000 *:ease-in-out'></div>
@@ -508,7 +515,7 @@ losers of near-kyiv 🄯 <span id='year'></span> | <a href="{{ '/' | locale_url}
  
 </div>
 
-<div id='new_ach' style='display:none;' class='grid grid-cols-[1fr_6fr] justify-center items-center fixed right-4 z-404 bottom-4 bg-white text-black w-[70vw] md:w-[40vw] p-2 gap-2 border-black border-4'>
+<div id='new_ach' style='display:none;' class='grid grid-cols-[1fr_6fr] justify-center items-center fixed md:right-4 z-404 right-0 bottom-0 md:bottom-4 bg-white text-black w-[99vw] md:w-[70vw] lg:w-[40vw] p-2 gap-2 border-black border-4'>
 <audio src='{{"/" | url}}sounds/yippie.mp3' id='ach_sound'></audio>
 <img id='new_ach_img' src='{{"/"|url}}imgs/achievements/example.png'>
 <p class='text-[0.9em]'><small><a href='{{"/"|locale_url}}settings' target='_blank'>new achievement unlocked! ⭐</a></small><br><b id='new_ach_title'>TITLE:</b><span id='new_ach_desc'>
@@ -638,13 +645,28 @@ const s_screen=document.getElementById('spoiler_screen');
 const cw_screen=document.getElementById('cw_screen');
 
 const normal=document.getElementById('normal');
+const footer=document.getElementById('footer');
 
 const talk_question=document.getElementById('talk_question');
 const talk_options=document.getElementById('talk_options');
 
+//if there is no spoiler state
+
+
 if(!localStorage.getItem("spoiler_state")){
 s_screen.classList.remove('hidden');
+normal.classList.add('hidden');
+footer.style.display = 'none';
+
+
+}else{
+s_screen.classList.add('hidden');
+normal.classList.remove('hidden');
+normal.style.display = 'block';
+footer.style.display = 'flex';
 }
+
+
 function opt_first(){
 talk_question.innerHTML="...WELCOME, THEN. THIS IS THE OFFICIAL WEBSITE FOR LOSERS OF NEAR-KYIV!";
 talk_options.innerHTML=
@@ -778,6 +800,7 @@ talk_options.innerHTML=`
 function website_spoilersUnlocked(){
 s_screen.classList.add('hidden');
 normal.classList.remove('hidden');
+footer.style.display = 'flex';
 
 localStorage.setItem('spoiler_state', 'false');
 loadSpoil();
@@ -789,6 +812,7 @@ loadSpoil();
 function website_spoilersLocked(actions){
 s_screen.classList.add('hidden');
 normal.classList.remove('hidden');
+footer.style.display = 'flex';
 
 localStorage.setItem('spoiler_state', 'true');
 loadSpoil();
@@ -980,17 +1004,22 @@ LOSERS OF NEAR-KYIV <b class='text-[#30A6D9]'>WILL NOT AT ANY POINT CONTAIN…</
 
 if(window.location.pathname=='{{"/" | locale_url}}read'){
 
+if (localStorage.getItem("spoiler_state")){
+
 
 if (localStorage.getItem("hideCW")=="true"){
 cw_screen.innerHTML="";
 cw_screen.style.display='none';
 
 normal.style.display='revert';
+footer.style.display = 'revert';
 document.body.style.backgroundColor='revert';
 
 }else{
 
 normal.style.display='none';
+footer.style.display = 'none';
+
 cw_screen.style.display='block';
 document.body.style.backgroundColor='black';
 cw_screen.innerHTML=cw_screen_content+`<div class='flex gap-4 flex-row w-full'>
@@ -999,6 +1028,8 @@ cw_screen.innerHTML=cw_screen_content+`<div class='flex gap-4 flex-row w-full'>
 </div>
 
 </div>`;
+}
+
 }
 
 }
@@ -1151,7 +1182,10 @@ jdateArray[i].innerHTML+=localStorage.getItem('join_date');
 
 if (s_state==='true'){
 help_link.innerHTML= `<p>???</p>`;
+help_link_m.innerHTML= `<p>???</p>`;
+
 community_link.innerHTML = `<p>???</p>`;
+community_link_m.innerHTML = `<p>???</p>`;
 
 
 if (s_screen){
@@ -1170,7 +1204,10 @@ normal.classList.remove('hidden');
 }
 
 help_link.innerHTML= `<a href="{{ '/' | locale_url }}help_us">❣️HELP US!</a>`;
-community_link.innerHTML= `<a href="{{ '/' | locale_url }}community">🌻community</a>`
+help_link_m.innerHTML= `<a href="{{ '/' | locale_url }}help_us">❣️HELP US!</a>`;
+community_link.innerHTML= `<a href="{{ '/' | locale_url }}community">🌻community</a>`;
+community_link_m.innerHTML= `<a href="{{ '/' | locale_url }}community">🌻community</a>`
+
 }
 
 

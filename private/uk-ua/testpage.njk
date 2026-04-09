@@ -1,0 +1,47 @@
+---
+ 
+title: testpage
+---
+
+<button onclick='funfunc("../imgs/cw_2.png");'>function</button>
+
+<!-- PRELOAD -->
+<div style='background-image: url("../imgs/cw_2.png")'></div>
+
+<div id='yay' style='background-image: url("../imgs/cw_1.png")' class='w-60 bg-yellow-200 h-60'>YAY</div>
+<script>
+
+function funfunc(x){
+
+$("#yay").addClass("squish");
+
+    setTimeout(function () {
+				$("#yay").css('background-image', 'url('+x+')');
+    }, 499);
+
+
+    setTimeout(function () {
+				$("#yay").removeClass("squish");
+    }, 1000);
+
+
+
+
+}
+</script>
+
+<div class='flex flex-row'>
+<button onclick='setThemePrimary("default"); setTheme("default");'>light theme</button>
+<button onclick='setThemePrimary("dark"); setTheme("default_dark");'>dark theme</button>
+
+<button onclick='setTheme("misha");'>misha</button>
+<button onclick='setTheme("misha_dark");'>misha</button>
+<button onclick='setTheme("acryl");'>acryl</button>
+<button onclick='setTheme("acryl_dark");'>acryl</button>
+<button onclick='setTheme("dima");'>dima</button>
+<button onclick='setTheme("dima_dark");'>dima</button>
+<button onclick='setTheme("zaria");'>zaria</button>
+<button onclick='setTheme("zaria_dark");'>zaria</button>
+</div>
+
+This is awesome LoNK test page in here! damn! this test page really be testing!

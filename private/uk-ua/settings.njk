@@ -1,0 +1,265 @@
+---
+ 
+title: НАЛАШТУВАННЯ | Лохи з-під Києва
+---
+<div class='min-h-[85vh] grid grid-cols-[1fr] md:grid-cols-[1fr_3fr] bg-dark-force text-light-force'>
+
+<div class='flex flex-col gap-2 p-8 align-center'>
+<img alt='' style='box-shadow: 5px 5px 0px 0px rgb(0,0,0);' class='border-dashed border-light border-2 pfp w-[70%] md:w-full '>
+<h1 class='font-bold text-[1.5em] username'>НАЛАШТУВАННЯ</h1>
+
+<p class='font-bold text-[1em] join_date'>ДАТА ПРИЄДНАННЯ: </p>
+
+<h2>досягнення:</h2>
+
+<div id='ach_tiny' class='flex flex-wrap w-full'>
+
+</div>
+
+</div>
+
+<div class='p-8 bg-light text-fortext relative'>
+
+<h2>📝 ОБЕРІТЬ ІМ'Я</h2>
+<input class='bg-white text-rose-400' id='namehere' placeholder='?????' type='text'>
+<button onclick='changeName()'>змінити</button>
+
+<h2>🖼️ ОБЕРІТЬ СВІТЛИНУ</h2>
+
+{%include 'profile_ua.njk'%}
+
+<h2>🏆 ДОСЯГНЕННЯ</h2>
+
+<button id='ssspread' onclick='showBox("ssspread");' class='button-none text-left w-full font-punk1 font-bold text-dark-force hover:bg-orange-300 bg-orange-200 p-2 text-[1.1em]'>= відкрити коробочку досягнень =</button>
+
+
+<div id='ssspread_box' class='hidden'>
+
+<div id='ach_holder' class='bg-black w-full grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr] text-[0.8em] gap-2 p-4 text-black *:bg-white *:p-2'>
+</div>
+
+</div>
+
+
+<h2>🔒 РЕЖИМ БЕЗ СПОЙЛЕРІВ:</h2> <u id='s_status'>зараз УВІМКНЕННИЙ</u> <button onclick='s_mode();'>ЗМІНИТИ ?</button>
+
+<script>
+
+const nameinput=document.getElementById('namehere');
+
+function changeName(){
+localStorage.setItem('username', nameinput.value);
+alert("ім'я змінено! оновіть сторінку.");
+}
+
+const s_state=localStorage.getItem('spoiler_state');
+const s_show_text=document.getElementById('s_status');
+if (s_state==='true'){
+s_show_text.innerHTML='зараз УВІМКНЕННИЙ ✅';
+}else if (s_state==='false'){
+s_show_text.innerHTML='зараз ВИМКНЕНИЙ ❌';
+}
+
+function s_mode(){
+
+if (s_state==='true'){
+ localStorage.setItem("spoiler_state", 'false');
+ alert('стан оновлено! оновіть сторінку.');
+
+}else if (s_state==='false'){
+ localStorage.setItem("spoiler_state", 'true');
+ alert('стан оновлено! оновіть сторінку.');
+}
+
+}
+
+</script>
+
+
+<!-- SAVE / LOADING -->
+<button onclick='cutetoggle()' class='button-none w-full text-left p-2 bg-white text-dark-force hover:bg-rose-100 text-dark-force'>
+💾 НАТИСНІТЬ СЮДИ ЩОБ ВІДКРИТИ АБО ПЕРЕНЕСТИ СВІЙ ФАЙЛ ЗБЕРЕЖЕННЯ </button>
+
+<div id='saveboxbig' class='hidden grid-cols-2 gap-2 w-full *:w-full grid'>
+
+<div>
+<h2>ЗБЕРЕГТИ ДАНІ </h2>
+
+<div id='old_data' class='opacity-75 break-words overflow-y-scroll h-[20vh] bg-white text-zinc-400'>
+ВАШІ ІСНУЮЧІ ДАНІ
+</div>
+<button onclick='copyOldData();'>СКОПІЮВАТИ СТАРІ ДАНІ</button>
+</div>
+
+<div class='flex flex-col'>
+<h2>ВСТАНОВИТИ НОВІ ДАНІ</h2>
+<textarea id='new_data' class='resize-none overflow-y-scroll  h-[20vh] break-words bg-white text-zinc-400'>
+</textarea>
+<button class='w-fit' onclick='setNewData();'>ВСТАНОВИТИ</button>
+</div>
+
+<div id='eraseall' class='col-span-2 m-2'>
+<button onclick='erase1();' class='button-none bg-black text-white w-full p-4'>СТЕРТИ ВСІ ДАНІ І ЗАБУТИ ВСЕ?</button>
+</div>
+
+</div>
+
+
+
+<small class='md:absolute md:mt-0 md:bottom-2 md:right-2'>ваш акаунт збережений ЛОКАЛЬНО НА ВАШОМУ ПРИСТРОЇ і НЕ ПЕРЕДАЄТЬСЯ хмарно!</small>
+
+</div>
+
+</div>
+
+<script>
+
+
+function cutetoggle (){
+biggest.classList.toggle('hidden');
+}
+
+const eraseall= document.getElementById('eraseall');
+
+function erase1(){
+eraseall.innerHTML=`
+<p>ЦЕ... ТОЧНО?</p>
+<button class='button-none bg-black text-white p-4' onclick='erase2();'>ТАК</button>
+`;
+}
+
+function erase2(){
+eraseall.innerHTML=`
+<p>ТОБІ НЕ ОБОВ'ЯЗКОВО ЦЕ РОБИТИ.</p>
+<button class='button-none bg-black text-white p-4' onclick='erase3();'>Я ХОЧУ</button>
+`;
+}
+
+function erase3(){
+eraseall.innerHTML=`
+<p>В ТЕБЕ ЗАЛИШАТЬСЯ ВСІ ТВОЇ СПОГАТИ. ТИ ВСЕ ЦЕ БУДЕШ ЦЕ ПАМ'ЯТАТИ. ВСЕ ЩО ВІДБУЛОСЯ... ТИ ГОВОРИШ ЩО ЗАБУДЕШ, АЛЕ ТИ НЕ МОЖЕШ ЦЕ СПРАВДІ ЗАБУТИ.</p>
+<button class='button-none bg-black text-red-500 font-bold p-4' onclick='eraseFinal();'>Я ЗНАЮ.</button>
+`;
+}
+
+function eraseFinal(){
+newbox.value="{}";
+setNewData();
+alert('прошу оновіть сторінку.');
+alert('прошу оновіть сторінку,');
+alert('прошу оновіть сторінку.');
+}
+
+const box= document.getElementById('old_data');
+
+const newbox= document.getElementById('new_data');
+const biggest= document.getElementById('saveboxbig');
+
+const allStorage = { ...localStorage };
+let newtext = JSON.stringify(allStorage);
+box.innerHTML= newtext;
+var myobj = JSON.parse(newtext);
+
+// ^ GETS LOCAL DATA THAT EXISTS RN AND LOADS IT WOAH
+
+function setNewData(){
+
+
+myobj = JSON.parse(newbox.value);
+
+localStorage.clear();
+
+console.log(myobj);
+
+Object.keys(myobj).forEach(key => {
+  localStorage.setItem(key, myobj[key]);  
+});
+
+alert('нові дані встановлено! оновіть сторінку.');
+
+}
+
+  const copyOldData = async () => {
+    try {
+	  let text = box.innerHTML;
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
+</script>
+
+
+
+<script>
+const holder = document.getElementById("ach_holder"); 
+const mini_holder = document.getElementById("ach_tiny"); 
+
+for (var i = 0; i < achbase.length; i++) {
+
+
+if (localStorage.getItem(achbase[i].id)=='true'){
+console.log('УРА');
+
+holder.innerHTML+= 
+`
+
+<div class='ach grid flex-grow text-center' id='` + achbase[i].id +  `'>
+<h2>⭐ `+achbase[i].title+`</h2>
+
+<img class='justify-self-center' src='{{"/"|url}}imgs/achievements/` + achbase[i].id + `.png'>
+
+<p id=' `+ achbase[i].id +`_desc'>` + achbase[i].desc + `</p>
+</div>
+
+`;
+
+mini_holder.innerHTML+=`
+<img title=' ` + achbase[i].title+ ` ' src='{{"/"|url}}imgs/achievements/` + achbase[i].id + `.png'>
+`;
+
+}else{
+console.log('NAY!');
+
+holder.innerHTML+= 
+
+`
+
+<div class='ach grid flex-grow text-center' id='` + achbase[i].id +  `'>
+<h2>`+achbase[i].title+`</h2>
+
+<img class='justify-self-center' src='{{"/"|url}}imgs/achievements/example.png'>
+
+<p id=' `+ achbase[i].id +`_desc'> [ ЗАКРИТО ] </p>
+</div>
+
+`
+
+}
+
+}
+
+/*
+const achievements = document.querySelectorAll(".ach"); 
+console.log(achievements);
+
+
+ for (let i = 0; i < achievements.length; i++) {
+
+let namesie = achievements[i].id;
+
+console.log(namesie);
+
+if (localStorage.getItem(namesie)){
+document.getElementById(namesie+'_desc').classList.remove('hidden');
+console.log(namesie +' is true, supposedly');
+}else{
+document.getElementById(namesie+'_desc').classList.add('hidden');
+}
+
+}*/
+
+
+</script>

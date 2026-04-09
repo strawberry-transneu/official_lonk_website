@@ -23,6 +23,7 @@ title: READ | Losers of Near-Kyiv
 
 </div>
 
+
 </div>
 <div id='preview' class='bg-cover bg-dark-force h-70 md:h-full relative'>
 <div class='absolute top-0 right-0 h-full w-full bg-highlight/20'></div>
@@ -30,6 +31,16 @@ title: READ | Losers of Near-Kyiv
 <div id='pagePage' class='absolute hidden top-0 left-0 p-2 bg-black text-light-force'></div> <!-- page #3 -->
 
 <a id='read' class='button absolute hidden bottom-0 right-0 md:w-auto w-full'>read ?</a>
+</div>
+<div class='flex w-full md:col-span-2 text-[0.85em] justify-end p-2 items-center gap-2'>
+
+
+<p>losers of near-kyiv is a proud member of <b>web/comic/ring</b>, a digital collective of unique custom internet comics!<br>check them out!</p>
+
+<div id='webcomicwebring'>
+<script type="text/javascript" src="https://webcomicring.org/js/comicring-variables.js"></script>
+<script type="text/javascript" src="https://webcomicring.org/js/comicring-widget.js"></script></div>
+
 </div>
 
 </div>
@@ -82,7 +93,7 @@ function mouseOver(x) {
   if (localStorage.getItem(currentcomicRead)=='true'){
   document.getElementById("pagePage").classList.add('block');  
   document.getElementById("pagePage").classList.remove('hidden'); 
-  document.getElementById("pagePage").innerHTML='✔️ finished';
+  document.getElementById("pagePage").innerHTML='✔ finished';
   document.getElementById("preview").style.backgroundImage = "url('../imgs/"+x+"/"+preview_img+".png')"; 
   document.getElementById("read").innerHTML = 'reread?';
   }
@@ -109,11 +120,11 @@ let y=localStorage.getItem('comics_0_read');
 let xy=localStorage.getItem('comics_1_read'); //checks if its read
 
 if(y=='true'){
-document.getElementById("comics_0").innerHTML = '🗹 READ | ' + document.getElementById("comics_0").innerHTML;
+document.getElementById("comics_0").innerHTML = '&#x2705; READ | ' + document.getElementById("comics_0").innerHTML;
 }
 
 if(xy=='true'){
-document.getElementById("comics_1").innerHTML = '🗹 READ | ' + document.getElementById("comics_1").innerHTML;
+document.getElementById("comics_1").innerHTML = '&#x2705; READ | ' + document.getElementById("comics_1").innerHTML;
 }
 
 

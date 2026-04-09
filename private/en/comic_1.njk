@@ -9,7 +9,7 @@ layout: null
 {% extends "template.njk" %}
 
 {% block inside %}
-<body>
+<div class='w-full'>
 
 
 <div class='w-full bg-black bg-size-[300px] flex-center flex-col'>
@@ -113,14 +113,14 @@ finish_date();
 {%endif%}
 
 {%if (pagination.pageNumber + 1)== 1 %}
-<h1 class='text-outline text-white font-black text-center text-[4em]'>THE INTRODUCTION:</h1>
+<h1 class='text-outline text-white font-black text-center break-all text-[4em]'>THE INTRODUCTION:</h1>
 
 <div class='text-white bg-black flex-center flex-col'>
 <small class='text-orange-200 text-center'>FIRST TIME? consider reading this together with a friend, make a live thread, or record your reaction!</small>
 
 <h2 class='mt-2'>CHAPTER SPECIFIC CONTENT WARNINGS:</h2>
 <p class='text-center my-2 md:my-0'>magical fire | death threats | single clumsy mention of deadly diseases</p>
-<p class='mb-[40vh] text-center'><a href='{{"/"|url}} en/content_warnings'>check ALL warnings for the story</a></p>
+<p class='mb-[40vh] text-center'><a href='{{"/"|locale_url}}/content_warnings'>check ALL warnings for the story</a></p>
 </div>
 
 
@@ -189,6 +189,14 @@ CULTURAL NOTE: <a href='https://en.wikipedia.org/wiki/Culturology'>culturology</
 </p>
 {% endif %}
 
+{%if (pagination.pageNumber + 1)== 29 %}
+<h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
+<p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
+CULTURAL NOTE: <a href='https://en.wikipedia.org/wiki/Culturology'>culturology</a> is similar in concept, but is not really the same as picking western cultural studies!
+</p>
+{% endif %}
+
+
 
 {%if (pagination.pageNumber + 1)== 31 %}
 <h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
@@ -211,7 +219,7 @@ CULTURAL NOTE: if needed, please google "Gerard Way My Chemical Romance".
 {%if (pagination.pageNumber + 1)== 54 %}
 <h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
 <p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
-that's a simplified version of a <b>real mug muffin recipe i made lol</b>
+that's a simplified version of a <a href='www.edimdoma.ru/retsepty/48979-keks-v-kruzhke'><b>real mug muffin recipe i make</b></a> lol
 </p>
 {% endif %}
 
@@ -219,7 +227,7 @@ that's a simplified version of a <b>real mug muffin recipe i made lol</b>
 <h2 class='text-light-force bg-black/80 px-2'>author's note:</h2>
 <p class='text-lg w-full px-1 md:px-45 py-8 my-4 bg-black/70 text-center text-white '>
 CULTURAL NOTE: saying you like anime out of all things is like, REALLY, really, the gayest act one can do in a situation like this.
-<br>if in many western countries like France or UK manga is something you can buy in a regular bookstore, in ukraine its much largely a niche underground thing, mostly liked by total nerds or queers... and very often by total nerd queers.<br>
+<br>if in many western countries like France or UK manga is something you can buy in a regular bookstore, in ukraine for many years it was a much more niche underground thing, mostly liked by total nerds or queers... and very often by total nerd queers.<br>
 not good for dima!<br>
 (one of beta readers said it's comparable to liking musical theatre in the west, if it helps.)
 </p>
@@ -245,10 +253,12 @@ CULTURAL NOTE: "untraditional" is one way you can imply subtly and gently imply 
 
 
 {%if (pagination.pageNumber + 1)!== 1 %}
-<a class='text-white button' href='{{ pagination.pageNumber }}'>↩️ previous</a>
+<a class='text-white button md:order-none -order-2' href='{{ pagination.pageNumber }}'>↩️ previous</a>
 {%endif%}
 
-<a class='text-white button' href='{{ "/"|url}}en/read'>🏠</a>
+
+
+<a class='text-white button' href='{{ "/"|locale_url}}/read'>🏠</a>
 
 <button class='text-white' onClick='savePage(); alert("PAGE SAVED!");'>💾save</button>
 
@@ -263,8 +273,8 @@ CULTURAL NOTE: "untraditional" is one way you can imply subtly and gently imply 
 
 
 
-{%if ((pagination.pageNumber + 1)!== 83) %}
-<a class='text-white button' href='{{ pagination.pageNumber +2}}'>next ➡️</a>
+{%if ((pagination.pageNumber + 1)!== 83) and ((pagination.pageNumber + 1)!== 30) %}
+<a class='text-white button md:order-none -order-1' href='{{ pagination.pageNumber +2}}'>next ➡️</a>
 {%endif%}
 
 
@@ -466,7 +476,7 @@ console.log('yay');
 </script>
 
 
-</body>
+</div>
 
 
 

@@ -12,10 +12,12 @@ module.exports = async function (eleventyConfig) {
     },
   });
 
-	
-  eleventyConfig.addPassthroughCopy({ "private/imgs/": "imgs" });
-  eleventyConfig.addPassthroughCopy({ "private/fonts/": "fonts" });
-  eleventyConfig.addPassthroughCopy({ "private/sounds/": "sounds" });
+
+  eleventyConfig.addPassthroughCopy("imgs");
+  eleventyConfig.addPassthroughCopy("fonts");
+  eleventyConfig.addPassthroughCopy("sounds");
+
+
 
   // Prevent foo.html → foo/index.html
   eleventyConfig.addGlobalData("permalink", "{{ page.filePathStem }}.html");

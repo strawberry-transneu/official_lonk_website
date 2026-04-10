@@ -1,10 +1,13 @@
 
 
 
+
 <div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2'>
 
 <div class='flex-center gap-2 flex-col p-4 text-dark bg-light'>
+
 <img class='w-full' src="{{ '/' | url }}imgs/pfps/pfp.jpg">
+
 <button onclick='pfpPick("pfp.jpg");'>PICK?</button>
 </div>
 
@@ -33,11 +36,366 @@
 
 </div>
 
+
+ <small> or add a custom PFP... </small> 
+<input type='text' id='pfp_idea' onchange='pfpPick(this.value, "yes");' placeholder='URL of an image' class='inline-block mb-2 resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
+</input>
+<button  class='text-[0.9em] button-none bg-zinc-300 text-black' onclick='pfpPick( document.getElementById("pfp_idea").value, "yes")'>set</button>
+
 <script>
-function pfpPick(x){
-const y = "{{ '/' | url }}imgs/pfps/"+x;
+function pfpPick(x, custom){
+let y;
+if (!custom){
+y = "{{ '/' | url }}imgs/pfps/"+x;
+}else{
+y = x;
+}
+
+const pfpArray = document.querySelectorAll(".pfp"); 
+for (let i = 0; i < pfpArray.length; i++) {
+pfpArray[i].src=y;
+}
+
 console.log(y);
 localStorage.setItem("pfp", y);
-alert('new image picked! reload the page.');
 }
+
+
 </script>
+
+
+
+<button onclick='showBox("decoco")' class='button-none text-left w-full font-punk3 text-dark-force hover:brightness-90 hover:saturate-140 bg-rose-200 p-2 text-[1.1em]'>&#x1F3F3;&#xFE0F;&#x200D;&#x1F308; OPEN PROFILE FLAGS + DECORATIONS </button>
+
+
+
+<div id='decoco_box' class='hidden flex flex-row gap-2 flex-wrap'>
+
+<button onclick='showTab("DECO","l1");' class='button-none text-left hover:brightness-90 hover:saturate-140  bg-[#c6a299] text-white'>
+<h3> &#x1F3F3;&#xFE0F;&#x200D;&#x1F308; flags </h3>
+</button>
+
+<button onclick='showTab("DECO","l2");' class='button-none text-left hover:brightness-90 hover:saturate-140  bg-[#c6a299] text-white'>
+<h3>&#x1F1FA;&#x1F1E6;  half-flags </h3>
+</button>
+
+<button onclick='showTab("DECO","l3");' class='button-none text-left hover:brightness-90 hover:saturate-140  bg-[#c6a299] text-white'>
+<h3>&#x1F380; decorations (WIP)</h3>
+</button>
+
+
+
+<div id='DECO' class='w-full h-full block'>
+<div id='l1_box' class=' hidden  *:hover:brightness-110  grayscale-25  *:h-[3rem] *:p-2 *:w-30'>
+
+<h3 class='block w-full! h-full!'>FULL FLAGS</h3>
+
+<button onclick='flag("1", "none")'>❌ NONE</button>
+
+
+<button onclick='flag("1", this)' style='background-image: linear-gradient(to bottom, #0056B9 0 50%, #FFD800 50% 100%)'></button>
+
+
+<button onclick='flag("1", this)' style=' background-image: linear-gradient(180deg, #E40303 0%, #E40303 17%, #FF8C00 17%, #FF8C00 33%, #FFED00 33%, #FFED00 50%, #008026 50%, #008026 67%, #24408E 67%, #24408E 83%, #732982 83%, #732982 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' style='
+background-image:linear-gradient(180deg, #D52D00 0%, #D52D00 14%, #EF7627 14%, #EF7627 29%, #FF9A56 29%, #FF9A56 43%, #ffffff 43%, #ffffff 57%, #D162A4 57%, #D162A4 71%, #B55690 71%, #B55690 86%, #A30262 86%, #A30262 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #078D70 0%, #078D70 14%, #26CEAA 14%, #26CEAA 29%, #98E8C1 29%, #98E8C1 43%, #FFFFFF 43%, #FFFFFF 57%, #7BADE2 57%, #7BADE2 71%, #5049CC 71%, #5049CC 86%, #3D1A78 86%, #3D1A78 100%)
+'></button>
+
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #ff0080 0%, #ff0080 33%, #8c4799 33%, #8c4799 67%, #0032a0 67%, #0032a0 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' style='color:black; background-image: linear-gradient(180deg, #5BCEFA 0%, #5BCEFA 20%, #F5A9B8 20%, #F5A9B8 40%, #ffffff 40%, #ffffff 60%, #F5A9B8 60%, #F5A9B8 80%, #5BCEFA 80%, #5BCEFA 100%)'></button>
+
+<button onclick='flag("1", this)' style='color:black; background-image: linear-gradient(180deg, #FF6691 0%, #FF6691 14%, #FF9A98 14%, #FF9A98 29%, #FFB883 29%, #FFB883 43%, #FAFEA8 43%, #FAFEA8 57%, #85BCFD 57%, #85BCFD 71%, #9E85FD 71%, #9E85FD 86%, #A519FD 86%, #A519FD 100%)'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #000000 0%, #000000 25%, #A3A3A3 25%, #A3A3A3 50%, #FFFFFF 50%, #FFFFFF 75%, #800080 75%, #800080 100%)
+'></button>
+
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #3DA542 0%, #3DA542 20%, #A7D379 20%, #A7D379 40%, #FFFFFF 40%, #FFFFFF 60%, #A9A9A9 60%, #A9A9A9 80%, #000000 80%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #e28c00 0%, #e28c00 20%, #eccd00 20%, #eccd00 40%, #ffffff 40%, #ffffff 60%, #62aedc 60%, #62aedc 80%, #203856 80%, #203856 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #FF218C 0%, #FF218C 33%, #FFD800 33%, #FFD800 67%, #21B1FF 67%, #21B1FF 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:linear-gradient(180deg, #fddb00 0%, #fddb00 25%, #ffffff 25%, #ffffff 50%, #9c5cd4 50%, #9c5cd4 75%, #000000 75%, #000000 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #740194 0%, #740194 20%, #aeb1aa 20%, #aeb1aa 40%, #ffffff 40%, #ffffff 60%, #aeb1aa 60%, #aeb1aa 80%, #740194 80%, #740194 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #097E16 0%, #097E16 20%, #aeb1aa 20%, #aeb1aa 40%, #ffffff 40%, #ffffff 60%, #aeb1aa 60%, #aeb1aa 80%, #097E16 80%, #097E16 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #fe9ace 0%, #fe9ace 20%, #ff53bf 20%, #ff53bf 40%, #200044 40%, #200044 60%, #6760fe 60%, #6760fe 80%, #8ea6ff 80%, #8ea6ff 100%)
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #f714ba 0%, #f714ba 33%, #01d66a 33%, #01d66a 67%, #1594f6 67%, #1594f6 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: 
+ linear-gradient(180deg, #65c286 0%, #65c286 20%, #b4e4cc 20%, #b4e4cc 40%, #ffffff 40%, #ffffff 60%, #e796b7 60%, #e796b7 80%, #d9446e 80%, #d9446e 100%)
+'></button>
+
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #000000 0%, #000000 14%, #BCC4C7 14%, #BCC4C7 29%, #FFFFFF 29%, #FFFFFF 43%, #B7F684 43%, #B7F684 57%, #FFFFFF 57%, #FFFFFF 71%, #BCC4C7 71%, #BCC4C7 86%, #000000 86%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #b57edc 0%, #b57edc 33%, #ffffff 33%, #ffffff 67%, #4a8123 67%, #4a8123 100%)
+'></button>
+
+
+
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image:  linear-gradient(180deg, #FFD800 0%, #FFD800 33%, #7902AA 33%, #7902AA 67%, #FFD800 67%, #FFD800 100%)
+
+'></button>
+
+<button onclick='flag("1", this)' style='color:black; 
+background-image: linear-gradient(180deg, #393CCB 0%, #393CCB 33%, #CD3E3A 33%, #CD3E3A 67%, #000000 67%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("1", this)' class='' style='background-size: 100% 2em; background-image: url({{"/"|url}}imgs/pfps/demise.png)'></button>
+
+<button onclick='flag("1", this)' class='' style='background-size: 100% 2em; background-image: url({{"/"|url}}imgs/pfps/demiro.png)'></button>
+
+
+<p class='w-full! h-full!'>you can also add a custom flag, either by copying one from <a href='https://gaydient.com/'>here</a> or <b>copying URL of some image</b>!</p>
+
+
+<input type='text' id='new_data' onchange='flag("1", this.value)' placeholder='CUSTOM FLAG LINK HERE...' class='w-full! resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
+</input>
+
+</div>
+
+
+
+
+
+
+<div id='l3_box' class=' hidden'>
+
+<h3 class='block w-full! h-full! aspect-[revert]!'>DECORATIONS</h3>
+
+
+<div class='flex flex-row gap-2 flex-wrap w-full *:w-[10rem] *:hover:brightness-90 *:hover:saturate-140  *:aspect-square *:bg-cover! '>
+<button onclick='flag("3", "none"); flag("0", "none")'>❌ NONE</button>
+
+<button onclick='flag("0", this)' style='background-color:#F1BF83; background-image: url({{ "/" | url }}imgs/pfps/deco2.png)'></button>
+<button onclick='flag("0", this)' style='background-color:#F1BF83; background-image: url({{ "/" | url }}imgs/pfps/deco3.png)'></button>
+<button onclick='flag("0", this)' style='background-color:#F1BF83; background-image: url({{ "/" | url }}imgs/pfps/deco4.png)'></button>
+<button onclick='flag("0", this)' style='background-color:#F1BF83; background-image: url({{ "/" | url }}imgs/pfps/deco1.png)'></button>
+
+<button onclick='flag("3", this)' style='background-color:#59423F; background-image: url({{ "/" | url }}imgs/pfps/inter1.png)'></button>
+<button onclick='flag("3", this)' style='background-color:#59423F; background-image: url({{ "/" | url }}imgs/pfps/inter2.png)'></button>
+<button onclick='flag("3", this)' style='background-color:#59423F; background-image: url({{ "/" | url }}imgs/pfps/polyam2.png)'></button>
+<button onclick='flag("3", this)' style='background-color:#59423F; background-image: url({{ "/" | url }}imgs/pfps/polyam1.png)'></button>
+
+</div>
+
+<small class='w-full! h-full!'>you can add custom stuff i guess!</small >
+<input type='text' id='new_data' onchange='flag("3", this.value)' placeholder='BACKGROUND' class='w-full! resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
+</input>
+
+<input type='text' id='new_data' onchange='flag("3", this.value)' placeholder='FOREGROUND' class='w-full! resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
+</input>
+
+
+</div>
+
+
+
+<div id='l2_box' class=' hidden  *:hover:brightness-110  grayscale-25  *:h-[3rem] *:p-2 *:w-30'>
+
+<h3 class='block w-full! h-full!'>HALF-FLAGS</h3>
+<button onclick='flag("2", "none")'>❌ NONE</button>
+
+
+<button onclick='flag("2", this)' style='background-image: linear-gradient(to bottom, #0056B9 0 50%, #FFD800 50% 100%)'></button>
+
+
+<button onclick='flag("2", this)' style=' background-image: linear-gradient(180deg, #E40303 0%, #E40303 17%, #FF8C00 17%, #FF8C00 33%, #FFED00 33%, #FFED00 50%, #008026 50%, #008026 67%, #24408E 67%, #24408E 83%, #732982 83%, #732982 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' style='
+background-image:linear-gradient(180deg, #D52D00 0%, #D52D00 14%, #EF7627 14%, #EF7627 29%, #FF9A56 29%, #FF9A56 43%, #ffffff 43%, #ffffff 57%, #D162A4 57%, #D162A4 71%, #B55690 71%, #B55690 86%, #A30262 86%, #A30262 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #078D70 0%, #078D70 14%, #26CEAA 14%, #26CEAA 29%, #98E8C1 29%, #98E8C1 43%, #FFFFFF 43%, #FFFFFF 57%, #7BADE2 57%, #7BADE2 71%, #5049CC 71%, #5049CC 86%, #3D1A78 86%, #3D1A78 100%)
+'></button>
+
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #ff0080 0%, #ff0080 33%, #8c4799 33%, #8c4799 67%, #0032a0 67%, #0032a0 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' style='color:black; background-image: linear-gradient(180deg, #5BCEFA 0%, #5BCEFA 20%, #F5A9B8 20%, #F5A9B8 40%, #ffffff 40%, #ffffff 60%, #F5A9B8 60%, #F5A9B8 80%, #5BCEFA 80%, #5BCEFA 100%)'></button>
+
+<button onclick='flag("2", this)' style='color:black; background-image: linear-gradient(180deg, #FF6691 0%, #FF6691 14%, #FF9A98 14%, #FF9A98 29%, #FFB883 29%, #FFB883 43%, #FAFEA8 43%, #FAFEA8 57%, #85BCFD 57%, #85BCFD 71%, #9E85FD 71%, #9E85FD 86%, #A519FD 86%, #A519FD 100%)'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #000000 0%, #000000 25%, #A3A3A3 25%, #A3A3A3 50%, #FFFFFF 50%, #FFFFFF 75%, #800080 75%, #800080 100%)
+'></button>
+
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #3DA542 0%, #3DA542 20%, #A7D379 20%, #A7D379 40%, #FFFFFF 40%, #FFFFFF 60%, #A9A9A9 60%, #A9A9A9 80%, #000000 80%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #e28c00 0%, #e28c00 20%, #eccd00 20%, #eccd00 40%, #ffffff 40%, #ffffff 60%, #62aedc 60%, #62aedc 80%, #203856 80%, #203856 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #FF218C 0%, #FF218C 33%, #FFD800 33%, #FFD800 67%, #21B1FF 67%, #21B1FF 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:linear-gradient(180deg, #fddb00 0%, #fddb00 25%, #ffffff 25%, #ffffff 50%, #9c5cd4 50%, #9c5cd4 75%, #000000 75%, #000000 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #740194 0%, #740194 20%, #aeb1aa 20%, #aeb1aa 40%, #ffffff 40%, #ffffff 60%, #aeb1aa 60%, #aeb1aa 80%, #740194 80%, #740194 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #097E16 0%, #097E16 20%, #aeb1aa 20%, #aeb1aa 40%, #ffffff 40%, #ffffff 60%, #aeb1aa 60%, #aeb1aa 80%, #097E16 80%, #097E16 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #fe9ace 0%, #fe9ace 20%, #ff53bf 20%, #ff53bf 40%, #200044 40%, #200044 60%, #6760fe 60%, #6760fe 80%, #8ea6ff 80%, #8ea6ff 100%)
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #f714ba 0%, #f714ba 33%, #01d66a 33%, #01d66a 67%, #1594f6 67%, #1594f6 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: 
+ linear-gradient(180deg, #65c286 0%, #65c286 20%, #b4e4cc 20%, #b4e4cc 40%, #ffffff 40%, #ffffff 60%, #e796b7 60%, #e796b7 80%, #d9446e 80%, #d9446e 100%)
+'></button>
+
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #000000 0%, #000000 14%, #BCC4C7 14%, #BCC4C7 29%, #FFFFFF 29%, #FFFFFF 43%, #B7F684 43%, #B7F684 57%, #FFFFFF 57%, #FFFFFF 71%, #BCC4C7 71%, #BCC4C7 86%, #000000 86%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #b57edc 0%, #b57edc 33%, #ffffff 33%, #ffffff 67%, #4a8123 67%, #4a8123 100%)
+'></button>
+
+
+
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image:  linear-gradient(180deg, #FFD800 0%, #FFD800 33%, #7902AA 33%, #7902AA 67%, #FFD800 67%, #FFD800 100%)
+
+'></button>
+
+<button onclick='flag("2", this)' style='color:black; 
+background-image: linear-gradient(180deg, #393CCB 0%, #393CCB 33%, #CD3E3A 33%, #CD3E3A 67%, #000000 67%, #000000 100%)
+'></button>
+
+
+<button onclick='flag("2", this)' class='' style='background-size: 100% 2em; background-image: url({{"/"|url}}imgs/pfps/demise.png)'></button>
+
+<button onclick='flag("2", this)' class='' style='background-size: 100% 2em; background-image: url({{"/"|url}}imgs/pfps/demiro.png)'></button>
+
+
+<p class='w-full! h-full!'>you can also add a custom flag, either by copying one from <a href='https://gaydient.com/'>here</a> or <b>copying URL of some image</b>!</p>
+
+
+<input type='text' id='new_data' onchange='flag("2", this.value)' placeholder='CUSTOM FLAG LINK HERE...' class='w-full! resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
+</input>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+function flag(layer, x){
+
+if (x==0||x=="none"){
+
+$( "#pfp_layer_"+layer ).css("background-image", "linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0))");
+
+
+localStorage.removeItem('pfp_layer_'+layer);
+}
+
+else{
+
+console.log(x);
+if (typeof x !== 'object'){
+
+if (x.startsWith("http")){
+$( "#pfp_layer_"+layer ).css("background-image", "url(" + x + ")");
+localStorage.setItem('pfp_layer_'+layer, "url(" + x + ")");
+}else{
+$( "#pfp_layer_"+layer ).css("background-image", x);
+localStorage.setItem('pfp_layer_'+layer, x);
+}
+console.log('works');
+
+
+}else{
+$( "#pfp_layer_"+layer ).css("background-image", x.style.backgroundImage);
+localStorage.setItem('pfp_layer_'+layer, x.style.backgroundImage);
+
+}
+
+}
+
+
+
+}
+
+</script>
+

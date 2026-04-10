@@ -378,7 +378,8 @@ margin: 0px!important;
 
 
 <div class='relative  flex flex-col *:py-2 *:text-[1.1em] *:text-fortext *:bg-light gap-4'>
-<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>
+<a href="" id='ua_link_1'>🇺🇦 укр</a>
+
 
 <a href="{{ '/' | locale_url }}">🏡home</a>
 
@@ -402,7 +403,27 @@ margin: 0px!important;
 </div>
 
 <button aria-label='open user settings menu' onclick='togglePFPMenu();' class='text-light-force! flex justify-center items-center m-0 p-0 border-0 gap-2'>
-<img id='pfp' alt='user options' class='w-12 h-12 gap-2 pfp'>
+
+
+<div class='inline-block relative w-12 h-12 gap-2 *:absolute *:top-0 *:left-0 *:w-full aspect-square aspect-1/1'>
+<img alt='user options' class='z-1  top-0 bottom-0 w-full h-full  pfp  '>
+
+<div class='l0 h-full z-2 ' style=' background-size: 100% 100%; background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0));  '></div>
+
+<div class='l3 h-full z-5' style=' background-size: 100% 100%;  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); '></div>
+
+<div style=' background-size: 100% 100%; background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); clip-path: polygon(100% 0%, 100% 100%, 50% 100%, 50% 93%, 93% 93%, 93% 7%, 50% 7%, 50% 0%);' 
+class='  l2 absolute z-4 h-full '>
+</div>
+
+<div style='background-size: 100% 100%;  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 7%, 93% 7%, 93% 93%, 7% 93%, 7% 7%, 100% 7%, 100% 0%);' 
+class='absolute z-3 h-full l1  '>
+</div>
+
+
+</div>
+
+
 <div>USER SETTINGS</div> 
 </button>
 
@@ -423,7 +444,7 @@ margin: 0px!important;
 
 <nav class='hidden lg:flex relative bg-cardboard bg-cover flex-grow flex-1 grid grid-cols-4 grid-rows-1 justify-end items-center flex-row self-stretch *:bg-light gap-4'>
 
-<a href="{{ '/uk-ua' |url }}">🇺🇦 укр</a>
+<a href="" id='ua_link_2'>🇺🇦 укр</a>
 
 
 <a href="{{ '/' | locale_url }}">🏡home</a>
@@ -445,15 +466,30 @@ margin: 0px!important;
 <button class='p-0 bg-light bg-none border-0' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒</button>
 
 <button aria-label='open user settings menu' onclick='togglePFPMenu();' class='m-0 p-0 border-0  mr-12'>
-<img id='pfp' alt='user options' class='w-12 aspect-square pfp'>
+
+<div class='relative w-12 h-12 gap-2 *:absolute *:top-0 *:left-0 *:w-full aspect-square aspect-1/1'>
+<img alt='user options' class='z-1  top-0 bottom-0 w-full h-full  pfp  '>
+
+<div class='l0 h-full z-2 ' style=' background-size: 100% 100%; background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0));  '></div>
+
+<div class='l3 h-full z-5' style=' background-size: 100% 100%;  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); '></div>
+
+<div style=' background-size: 100% 100%; background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); clip-path: polygon(100% 0%, 100% 100%, 50% 100%, 50% 93%, 93% 93%, 93% 7%, 50% 7%, 50% 0%);' 
+class='  l2 absolute z-4 h-full '>
+</div>
+
+<div style='background-size: 100% 100%;  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0)); clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 7%, 93% 7%, 93% 93%, 7% 93%, 7% 7%, 100% 7%, 100% 0%);' 
+class='absolute z-3 h-full l1  '>
+</div>
+
+
+</div>
+
 </button>
 
 <ul id='pfpmenu2' class='hidden md:max-w-[20vw] absolute p-2 z-10 top-[100%]'>
-<!--
-<li>ACHIEVEMENTS</li>
-<li>THEME SELECTOR</li>
-<li>PROFILE PICTURES</li>
--->
+
+
 <li>hello <span class='username'></span>!</li>
 <li><a href='{{ '/' | locale_url }}./settings'>⚙️ settings</a></li>
 </ul>
@@ -467,6 +503,13 @@ margin: 0px!important;
 -->
 </nav>
 </header>
+
+
+<script>
+let UA_URL = window.location.href.replace("en", "uk-ua");
+document.getElementById("ua_link_1").href=UA_URL;
+document.getElementById("ua_link_2").href=UA_URL;
+</script>
 
 <main class='flex m-2 md:m-4 justify-center items-center flex-col min-w-0 bg-light'>
 
@@ -1130,12 +1173,33 @@ let checkpfp=localStorage.getItem('pfp');
 if (!checkpfp){
 checkpfp="{{ '/' | url }}imgs/pfps/pfp.jpg";
 }
-
-
 const pfpArray = document.querySelectorAll(".pfp"); 
 for (let i = 0; i < pfpArray.length; i++) {
 pfpArray[i].src=checkpfp;
 }
+
+
+var checkpfp0=localStorage.getItem('pfp_layer_0');
+var checkpfp1=localStorage.getItem('pfp_layer_1');
+var checkpfp2=localStorage.getItem('pfp_layer_2');
+var checkpfp3=localStorage.getItem('pfp_layer_3');
+
+for (let layer = 0; layer < 4; layer++) {
+
+
+if (window['checkpfp' + layer]){
+let currentPfpArray = document.querySelectorAll(".l"+layer); 
+for (let ww = 0; ww < currentPfpArray.length; ww++) {
+
+currentPfpArray[ww].style.backgroundImage=window['checkpfp' + layer];
+}
+}
+
+}
+
+
+
+
 
 
 
@@ -1282,7 +1346,29 @@ setTimeout(() => {
 
 }
 
+function showTab(box, elem) {
 
+  console.log(box);
+  console.log("^BOX");
+  console.log(elem);
+  console.log("^ELEM");
+
+	let testlink="#"+(box)+">*:not(#"+(elem+"_box")+")";
+	console.log(testlink + "testlink");
+  let excluding=document.querySelectorAll(testlink);
+  console.log(excluding);
+  
+  for (let i=0; i<excluding.length; i++){
+  document.getElementById(excluding[i].id).classList.add('hidden');
+  }
+  
+  if(document.getElementById(elem+'_box').classList.contains("hidden")){
+  document.getElementById(elem+'_box').classList.remove('hidden');
+  }else{
+  document.getElementById(elem+'_box').classList.add('hidden');
+  }
+  
+}
 </script>
 </div>
 </body>

@@ -136,7 +136,7 @@ let start_choices=[
 ];
 
 let theatre_choices=[
-{title: "ТЕАТР", act:"theatre_dialogue"}, //this is so fucking funny
+{title: "ТЕАТРАЛЬНЕ", act:"theatre_dialogue"}, //this is so fucking funny
 ];
 
 let gf_choices=[
@@ -191,7 +191,7 @@ let name_dialogue=[
 { per:'a', text:"слухай, мене <b>всі</b> звуть акрил. <br> навіть міша. <br> тоооож, ось тобі моє ім'я!"},
 { per:'dt', text:"так сильно не хоче говорити...?", hide:['#d_text'], a_exp:'l_bored' },
 { per:'dt', text:`може його справжнє ім'я занадто іноземне для інших людей, тож він більше любить своє прізвисько...`, d_exp:'worry'},
-{ per:'dt', text:"якщо так, я розумію."},
+{ per:'dt', text:"якщо так, можу зрозуміти..."},
 
 { choices: start_choices, unlock:"door_dialogue" },
 
@@ -203,9 +203,10 @@ let art_dialogue=[
 { per:'a', text:"аааа, та, ні, таке собі.", a_exp:'r_annoyed'},
 { per:'a', text:"звісно дякую, але мені не дуже це подобається.", hide:['#d_text']},
 { per:'d', text:"що?", d_exp:'amused', a_exp:'l_bored'},
-{ per:'a', text:"графічний дизайн це &quot; достатньо круто &quot; , але... це не моя улюблена річ.", a_exp:'l_annoyed', d_exp:'worry_a'},
+{ per:'a', text:"графічний дизайн це, звісно, &quot; достатньо круто &quot; , але...", a_exp:'l_annoyed', d_exp:'worry_a'},
+{ per:'a', text:"графічний дизайн це, звісно, &quot; достатньо круто &quot; , але... це не моя улюблена річ.", a_exp:'l_annoyed', d_exp:'worry_a'},
 { per:'d', text:"тоді що є...?", d_exp:'worry_a_talk'},
-{ per:'a', text:"<b>ТЕАТР</b>, бро.", a_exp:'l_excited_talk', d_exp:'worry_a'},
+{ per:'a', text:"<b>ТЕАТРАЛЬНЕ</b>, бро.", a_exp:'l_excited_talk', d_exp:'worry_a'},
 
 { choices: theatre_choices, a_exp:'l_excited',},
 
@@ -335,7 +336,7 @@ let door_dialogue=[
 { per:'d', text:"а?", a_exp:'l_tease'},
 {   per:'a', text:"ну, не може бути що в ТЕБЕ з усіх людей не має дівчини... *миг*", a_exp:'l_tease_talk'},
 { per:'d', text:"а- я-", d_exp:'worry_gasp', a_exp:'l_tease'},
-{ musicPlay: "michelcMusic_stranger.wav", per:'dt', text:"ДІВЧИНА. ДІВЧИНА? В МЕНЕ НІКОЛИ НЕ БУЛО ДІВЧИНИ!!! БЛЯ. ЩО РОБИТИ.", d_exp:'amused'},
+{ musicPlay: "michelcMusic_stranger.wav", per:'dt', text:"ДІВЧИНА. ДІВЧИНА? В МЕНЕ НІКОЛИ НЕ БУЛО ДІВЧИНИ!!! ЩО РОБИТИ ЩО РОБИТИ ЩО РОБИТИ.", d_exp:'amused'},
 
 {  choices: gf_choices },
 ]

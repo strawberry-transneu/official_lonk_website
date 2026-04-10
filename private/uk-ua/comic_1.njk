@@ -241,9 +241,9 @@ finish_date();
 
 
 
-<a class='text-white button' href='{{ "/"|locale_url}}/read'>🏠</a>
+<a class='text-white button' href='{{ "/"|locale_url}}read'>🏠</a>
 
-<button class='text-white' onClick='savePage(); alert("СТОРІНКУ ЗБЕРЕЖЕНО!");'>💾зберегти сторінку</button>
+<button class='text-white' onClick='savePage(); alert("СТОРІНКУ ЗБЕРЕЖЕНО!");'>💾зберегти </button>
 
 <div class='button'>
 <input type="checkbox" id="autosaveCheck"> 
@@ -251,7 +251,7 @@ finish_date();
 </div>
 
 
-<button class='text-white' onClick='loadPage();'>📥завантажити сторінку</button>
+<button class='text-white' onClick='loadPage();'>📥завантажити </button>
 
 
 
@@ -262,6 +262,16 @@ finish_date();
 
 
 </section>
+
+
+
+<div class='flex flex-row gap-2 mr-[17%] text-[0.9em] w-full text-white items-center justify-end '>
+<a id='jumppage_button' class='button'>перейти</a>
+<label for="jumppage" class='text-white inline-block'> до сторінки №</label>
+<input class='text-white inline-block' oninput="document.getElementById('jumppage_button').href='./'+this.value+'.html'" id='jumppage' name='page' type='number' max='83' step='1' min='1'><span>?</span>
+
+</div>
+
 
 
 </div>

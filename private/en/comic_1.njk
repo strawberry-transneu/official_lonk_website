@@ -138,6 +138,7 @@ finish_date();
 -->
 
 
+
 <!-- if its a normal page like page 30 then everything is fine lol . i could make page 31 a lost page hehe -->
 {%if (pagination.pageNumber + 1)!== 30 %}
 
@@ -258,7 +259,7 @@ CULTURAL NOTE: "untraditional" is one way you can imply subtly and gently imply 
 
 
 
-<a class='text-white button' href='{{ "/"|locale_url}}/read'>🏠</a>
+<a class='text-white button' href='{{ "/"|locale_url}}read'>🏠</a>
 
 <button class='text-white' onClick='savePage(); alert("PAGE SAVED!");'>💾save</button>
 
@@ -281,9 +282,15 @@ CULTURAL NOTE: "untraditional" is one way you can imply subtly and gently imply 
 </section>
 
 
+<div class='flex flex-row gap-2 mr-[17%] text-[0.9em] w-full items-center text-white justify-end '>
+<a id='jumppage_button' class='button'>jump</a>
+
+<label for="jumppage" class='text-white inline-block'>to page #</label>
+<input class='text-white inline-block' oninput="document.getElementById('jumppage_button').href='./'+this.value+'.html'" id='jumppage' name='page' type='number' max='83' step='1' min='1'>
+<span>?</span>
 </div>
 
-
+</div>
 
 {%if (pagination.pageNumber + 1)== 1 %}
 

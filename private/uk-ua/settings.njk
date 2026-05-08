@@ -12,7 +12,7 @@ title: НАЛАШТУВАННЯ | Лохи з-під Києва
 
 
 
-<div class='relative w-full *:absolute *:top-0 *:left-0 *:w-full aspect-square aspect-1/1'>
+<div id='capture' class='relative w-full *:absolute *:top-0 *:left-0 *:w-full aspect-square aspect-1/1'>
 <img alt='' class='z-1  top-0 bottom-0 w-full h-full  pfp p-2 '>
 
 <div id='pfp_layer_0' class='l0 h-full z-2 p-2' style=' background-size: 100% 100%; background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,0));  '></div>
@@ -29,6 +29,53 @@ class='absolute z-3 h-full l1  '>
 
 
 </div>
+
+
+<button onclick="downloadTicket();">завантажити світлину</button>
+
+<script>
+function downloadTicket() {
+    const el = document.getElementById("capture");
+    const scale = window.devicePixelRatio;
+    const scale2 = 3;
+
+    // Find all elements with background-image styles
+    const elements = el.querySelectorAll('*');
+    elements.forEach(function(element) {
+        const backgroundImage = window.getComputedStyle(element).backgroundImage;
+
+        // If the element has a background image and it's from an external domain, rewrite it to use a CORS proxy
+        if (backgroundImage && backgroundImage !== 'none') {
+            const url = backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
+            if (url && url[2]) {
+                // Rewrite URL using CORS proxy
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const newUrl = proxyUrl + url[2];
+                element.style.backgroundImage = `url(${newUrl})`;
+            }
+        }
+    });
+
+    domtoimage.toPng(document.getElementById('capture'), {
+        height: el.offsetHeight * scale * scale2,
+        cacheBust: true,
+        width: el.offsetWidth * scale * scale2,
+        style: {
+            transform: `scale(${scale * scale2})`,
+            transformOrigin: 'top left',
+            width: `${el.offsetWidth * scale2}px`,
+            height: `${el.offsetHeight * scale2}px`
+        }
+    }).then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = 'ticket.png';
+        link.href = dataUrl;
+        link.click();
+    }).catch(function(error) {
+        console.error('Error generating image:', error);
+    });
+}
+</script>
 
 <h1 class='font-bold text-[1.5em] username'>НАЛАШТУВАННЯ</h1>
 

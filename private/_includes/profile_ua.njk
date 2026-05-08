@@ -39,6 +39,8 @@
 </input>
 <button  class='text-[0.9em] button-none bg-zinc-300 text-black' onclick='pfpPick( document.getElementById("pfp_idea").value, "yes")'>змінити</button>
 
+
+
 <script>
 function pfpPick(x, custom){
 let y;
@@ -67,7 +69,7 @@ localStorage.setItem("pfp", y);
 
 
 <div id='decoco_box' class='hidden flex flex-row gap-2 flex-wrap'>
-
+<small class='block w-full' style='line-height: 1em;'>^ якщо "кастомна" світлина, доведеться робити знімок екрана, кнопка "завантажити світлину" не працюватиме! </small>
 <button onclick='showTab("DECO","l1");' class='button-none text-left hover:brightness-90 hover:saturate-140  bg-[#c6a299] text-white'>
 <h3> &#x1F3F3;&#xFE0F;&#x200D;&#x1F308; прапора </h3>
 </button>
@@ -191,6 +193,7 @@ background-image: linear-gradient(180deg, #393CCB 0%, #393CCB 33%, #CD3E3A 33%, 
 
 
 <p class='w-full! h-full!'>також можливо додати свій прапор, або через <a href='https://gaydient.com/'>цей сайт</a> або через <b>URL будь-якої картинки</b>!</p>
+
 
 
 <input type='text' id='new_data' onchange='flag("1", this.value)' placeholder='ПОСИЛАННЯ НА ЯКИЙСЬ УНІКАЛЬНИЙ ПРАПОР' class='w-full! resize-none  overflow-y-scroll break-words bg-white! text-zinc-400'>
@@ -395,4 +398,5 @@ localStorage.setItem('pfp_layer_'+layer, x.style.backgroundImage);
 }
 
 </script>
+
 

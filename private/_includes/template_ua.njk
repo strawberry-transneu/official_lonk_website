@@ -352,7 +352,10 @@ margin: 0px!important;
 }
 </style>
 
-</head>
+
+{%if (page.fileSlug) == "settings" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
+{%endif%}</head>
 
 
 <body class='addtransitions font-cmu text-[1.15em] md:text-[1.25em] bg-home text-fortext min-w-0'>
@@ -603,6 +606,12 @@ LOREM KLSH FLKSDHF LK  SHL:A H DKLSD HFLK  SAHD L SHFDKLS FHLDSFK HSDLK HSD LF D
 <button class='p-0 bg-white-adapt text-black-adapt bg-none border-0 shadow-none' aria-hidden="true" onclick='setThemePrimary("dark"); setTheme("default_dark");'>🌒 ТЕМНА ТЕМА</button>
 </div> 
 </div>
+
+<div class='block lg:fixed lg:right-0 lg:bottom-0 lg:w-[25%] w-full  text-[0.85em]   z-5555 '>
+<a href='{{"/"|url}}en' class='button-none w-full hover:bg-zinc-800 bg-black  p-2 text-white'>&#x1F1FA;&#x1F1E6; english language</a>
+</div>
+
+
 </div>
 
 
